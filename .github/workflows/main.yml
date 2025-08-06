@@ -1,4 +1,4 @@
-name: Trivy Vulnerability Scan
+name: Snyk Vulnerability Scan
 
 on:
   push:
@@ -9,21 +9,26 @@ permissions:
   security-events: write
 
 jobs:
-  trivy:
-    name: Run Trivy scan
+  snyk:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@master
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/python-3.10@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          scan-type: 'fs'
-          format: 'sarif'
-          output: 'trivy-results.sarif'
+          args: --file=requirements.txt --sarif > snyk-report.sarif
 
-      - name: Upload Trivy scan results to GitHub Security tab
+      - name: Upload Snyk report to GitHub
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: 'trivy-results.sarif'
+          sarif_file: snyk-report.sarif
+          
+      - name: Upload Snyk SARIF report as a workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Snyk-SARIF-Report
+          path: snyk-report.sarif
