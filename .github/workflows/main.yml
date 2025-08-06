@@ -20,7 +20,7 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          args: --file=requirements.txt --sarif > snyk-report.sarif
+          args: --file=First Attempt/backend/requirements.txt --sarif > snyk-report.sarif
 
       - name: Upload Snyk report to GitHub
         uses: github/codeql-action/upload-sarif@v3
