@@ -1,0 +1,55 @@
+
+        <!DOCTYPE html>
+        <html lang='en'>
+        <head>
+            <meta charset='UTF-8'>
+            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+            <title>Custom_Report - Custom Security Report</title>
+            <style>
+                body { background: #231942; color: #f3e8ff; font-family: 'Inter', sans-serif; }
+                .container { max-width: 900px; margin: 40px auto; padding: 30px; background: #32235a; border-radius: 18px; box-shadow: 0 0 24px #0003; }
+                h1, h2, h3 { color: #a259ec; text-align: center; margin-bottom: 0.5em; }
+                h1 { font-size: 2.2em; }
+                h2 { font-size: 1.5em; margin-top: 2em; }
+                h3 { font-size: 1.2em; margin-top: 1.5em; }
+                .summary { background: #2d1950; border-radius: 12px; padding: 1.5em; margin-bottom: 2em; }
+                .summary-item { display: flex; justify-content: space-between; padding: 0.5em 0; border-bottom: 1px solid #3d2c5a; }
+                .summary-item:last-child { border-bottom: none; }
+                .risk-critical { color: #a259ec; }
+                .risk-high { color: #e94560; }
+                .risk-medium { color: #f7b731; }
+                .risk-low { color: #4dd599; }
+                .risk-informational { color: #5b8dee; }
+                .risk-none { color: #6c47a3; }
+                .alert-card { background: #2d1950; border-radius: 10px; margin-bottom: 1.5em; padding: 1.2em; box-shadow: 0 2px 8px #0002; }
+                .risk-tag { display: inline-block; padding: 2px 12px; border-radius: 6px; color: #fff; font-size: 0.95em; margin-bottom: 0.5em; font-weight: bold; }
+                .footer { text-align: center; margin-top: 40px; font-size: 0.9em; color: #b39ddb; }
+                a { color: #5b8dee; }
+                pre { background: #231942; color: #f3e8ff; border-radius: 6px; padding: 0.7em; overflow-x: auto; }
+            </style>
+        </head>
+        <body>
+            <div class='container'>
+                <h1>Custom_Report - Custom Security Report</h1>
+                <p style='text-align:center;color:#e94560;'><strong>Generated On:</strong> 2025-07-26 13:23:03</p>
+                <p style='text-align:center;'>This report provides a summary and detailed listing of vulnerabilities identified during the web application scan using OWASP ZAP.</p>
+                <h2>Summary of Vulnerabilities</h2>
+                <div class='summary'>
+                    <div class='summary-item'><span>Critical:</span> <span class='risk-critical'>0</span></div>
+                    <div class='summary-item'><span>High:</span> <span class='risk-high'>0</span></div>
+                    <div class='summary-item'><span>Medium:</span> <span class='risk-medium'>3</span></div>
+                    <div class='summary-item'><span>Low:</span> <span class='risk-low'>3</span></div>
+                    <div class='summary-item'><span>Informational:</span> <span class='risk-informational'>0</span></div>
+                    <div class='summary-item'><span>No Risk:</span> <span class='risk-none'>0</span></div>
+                </div>
+                <h2>Detailed Alerts</h2>
+        <div class='alert-card'><span class='risk-tag' style='background:#f7b731'>Medium</span> <b>Missing Anti-clickjacking Header</b><br><b>URL:</b> <a href='http://rest.vulnweb.com/' target='_blank'>http://rest.vulnweb.com/</a><br><b>Confidence:</b> Medium<br><b>Description:</b><pre>The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options.</pre><b>Solution:</b><pre>Modern Web browsers support the Content-Security-Policy and X-Frame-Options HTTP headers. Ensure one of them is set on all web pages returned by your site/app.
+If you expect the page to be framed only by pages on your server (e.g. it's part of a FRAMESET) then you'll want to use SAMEORIGIN, otherwise if you never expect the page to be framed, you should use DENY. Alternatively consider implementing Content Security Policy's "frame-ancestors" directive.</pre></div><div class='alert-card'><span class='risk-tag' style='background:#f7b731'>Medium</span> <b>Content Security Policy (CSP) Header Not Set</b><br><b>URL:</b> <a href='http://rest.vulnweb.com/' target='_blank'>http://rest.vulnweb.com/</a><br><b>Confidence:</b> High<br><b>Description:</b><pre>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross Site Scripting (XSS) and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page — covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</pre><b>Solution:</b><pre>Ensure that your web server, application server, load balancer, etc. is configured to set the Content-Security-Policy header.</pre></div><div class='alert-card'><span class='risk-tag' style='background:#4dd599'>Low</span> <b>Server Leaks Version Information via "Server" HTTP Response Header Field</b><br><b>URL:</b> <a href='http://rest.vulnweb.com/' target='_blank'>http://rest.vulnweb.com/</a><br><b>Confidence:</b> High<br><b>Description:</b><pre>The web/application server is leaking version information via the "Server" HTTP response header. Access to such information may facilitate attackers identifying other vulnerabilities your web/application server is subject to.</pre><b>Solution:</b><pre>Ensure that your web server, application server, load balancer, etc. is configured to suppress the "Server" header or provide generic details.</pre></div><div class='alert-card'><span class='risk-tag' style='background:#4dd599'>Low</span> <b>X-Content-Type-Options Header Missing</b><br><b>URL:</b> <a href='http://rest.vulnweb.com/' target='_blank'>http://rest.vulnweb.com/</a><br><b>Confidence:</b> Medium<br><b>Description:</b><pre>The Anti-MIME-Sniffing header X-Content-Type-Options was not set to 'nosniff'. This allows older versions of Internet Explorer and Chrome to perform MIME-sniffing on the response body, potentially causing the response body to be interpreted and displayed as a content type other than the declared content type. Current (early 2014) and legacy versions of Firefox will use the declared content type (if one is set), rather than performing MIME-sniffing.</pre><b>Solution:</b><pre>Ensure that the application/web server sets the Content-Type header appropriately, and that it sets the X-Content-Type-Options header to 'nosniff' for all web pages.
+If possible, ensure that the end user uses a standards-compliant and modern web browser that does not perform MIME-sniffing at all, or that can be directed by the web application/web server to not perform MIME-sniffing.</pre></div><div class='alert-card'><span class='risk-tag' style='background:#4dd599'>Low</span> <b>Server Leaks Information via "X-Powered-By" HTTP Response Header Field(s)</b><br><b>URL:</b> <a href='http://rest.vulnweb.com/' target='_blank'>http://rest.vulnweb.com/</a><br><b>Confidence:</b> Medium<br><b>Description:</b><pre>The web/application server is leaking information via one or more "X-Powered-By" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to.</pre><b>Solution:</b><pre>Ensure that your web server, application server, load balancer, etc. is configured to suppress "X-Powered-By" headers.</pre></div><div class='alert-card'><span class='risk-tag' style='background:#f7b731'>Medium</span> <b>Hidden File Found</b><br><b>URL:</b> <a href='http://rest.vulnweb.com/info.php' target='_blank'>http://rest.vulnweb.com/info.php</a><br><b>Confidence:</b> High<br><b>Description:</b><pre>A sensitive file was identified as accessible or available. This may leak administrative, configuration, or credential information which can be leveraged by a malicious individual to further attack the system or conduct social engineering efforts.</pre><b>Solution:</b><pre>Consider whether or not the component is actually required in production, if it isn't then disable it. If it is then ensure access to it requires appropriate authentication and authorization, or limit exposure to internal systems or specific source IPs, etc.</pre></div>
+                <div class='footer'>
+                    <p>&copy; 2025 Haroon Allahdad - CyberGuard FYP. All rights reserved.</p>
+                </div>
+            </div>
+        </body>
+        </html>
+        

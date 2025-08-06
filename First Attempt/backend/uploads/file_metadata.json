@@ -1,0 +1,302 @@
+{
+  "Custom_ZAP_Report_www_vulnweb_com_794b8f38219e4486a0ac364f29b7c862.html": {
+    "title": "Web Scan Report: http://www.vulnweb.com/",
+    "description": "Custom ZAP Security Report for http://www.vulnweb.com/. Highest detected risk: Medium.",
+    "fileName": "Custom_ZAP_Report_www_vulnweb_com_794b8f38219e4486a0ac364f29b7c862.html",
+    "fileUrl": "http://127.0.0.1:5000/uploads/Custom_ZAP_Report_www_vulnweb_com_794b8f38219e4486a0ac364f29b7c862.html",
+    "fileType": "text/html",
+    "highest_risk": "Medium",
+    "source": "zap_report",
+    "timestamp": 1752088810.4363372
+  },
+  "Custom_ZAP_Report_www_vulnweb_com_76f491ad41494398b006bd0323b34add.html": {
+    "title": "Custom Web Scan Report: http://www.vulnweb.com/",
+    "description": "Custom ZAP Security Report for http://www.vulnweb.com/. Highest detected risk: Medium.",
+    "fileName": "Custom_ZAP_Report_www_vulnweb_com_76f491ad41494398b006bd0323b34add.html",
+    "fileUrl": "http://127.0.0.1:5000/uploads/Custom_ZAP_Report_www_vulnweb_com_76f491ad41494398b006bd0323b34add.html",
+    "fileType": "text/html",
+    "highest_risk": "Medium",
+    "source": "zap_report",
+    "timestamp": 1752138587.4120367
+  },
+  "Custom_ZAP_Report_www_vulnweb_com_2d26d3b327394c70b0a0c2db494a561c.html": {
+    "title": "Custom Web Scan Report: http://www.vulnweb.com/",
+    "description": "Custom ZAP Security Report for http://www.vulnweb.com/. Highest detected risk: Medium.",
+    "fileName": "Custom_ZAP_Report_www_vulnweb_com_2d26d3b327394c70b0a0c2db494a561c.html",
+    "fileUrl": "http://127.0.0.1:5000/uploads/Custom_ZAP_Report_www_vulnweb_com_2d26d3b327394c70b0a0c2db494a561c.html",
+    "fileType": "text/html",
+    "highest_risk": "Medium",
+    "source": "zap_report",
+    "timestamp": 1752147219.6308177
+  },
+  "Custom_ZAP_Report_www_vulnweb_com_589fd1bae3b243458695922a915d9c61.html": {
+    "title": "Custom Web Scan Report: http://www.vulnweb.com/",
+    "description": "Custom ZAP Security Report for http://www.vulnweb.com/. Highest detected risk: Medium.",
+    "fileName": "Custom_ZAP_Report_www_vulnweb_com_589fd1bae3b243458695922a915d9c61.html",
+    "fileUrl": "http://127.0.0.1:5000/uploads/Custom_ZAP_Report_www_vulnweb_com_589fd1bae3b243458695922a915d9c61.html",
+    "fileType": "text/html",
+    "highest_risk": "Medium",
+    "source": "zap_report",
+    "timestamp": 1752147796.7420564
+  },
+  "ZAP_Native_Report_testasp_vulnweb_com_e84a41b8b9b04462b24068b417698672.html": {
+    "title": "ZAP Native Report: http://testasp.vulnweb.com/ (Default Template)",
+    "description": "Native ZAP Security Report for http://testasp.vulnweb.com/ using ZAP's default HTML template. Highest detected risk: Medium.",
+    "fileName": "ZAP_Native_Report_testasp_vulnweb_com_e84a41b8b9b04462b24068b417698672.html",
+    "fileType": "text/html",
+    "fileUrl": "http://127.0.0.1:5000/uploads/ZAP_Native_Report_testasp_vulnweb_com_e84a41b8b9b04462b24068b417698672.html",
+    "source": "zap_report",
+    "highest_risk": "Medium",
+    "timestamp": 1752422836.0905116
+  },
+  "Custom_ZAP_Report_testphp_vulnweb_com_17f6462b71c34b8aba1bb5fb5b7e3caf.html": {
+    "title": "Custom Web Scan Report: http://testphp.vulnweb.com/",
+    "description": "Custom ZAP Security Report for http://testphp.vulnweb.com/. Highest detected risk: High.",
+    "fileName": "Custom_ZAP_Report_testphp_vulnweb_com_17f6462b71c34b8aba1bb5fb5b7e3caf.html",
+    "fileType": "text/html",
+    "fileUrl": "http://127.0.0.1:5000/uploads/Custom_ZAP_Report_testphp_vulnweb_com_17f6462b71c34b8aba1bb5fb5b7e3caf.html",
+    "source": "zap_report",
+    "highest_risk": "High",
+    "timestamp": 1752427971.6835835
+  },
+  "Custom_ZAP_Report_testhtml5_vulnweb_com_0eb2f18413584cbfad95eb97d45f80d0.html": {
+    "title": "Custom Web Scan Report: http://testhtml5.vulnweb.com/#/popular",
+    "description": "Custom ZAP Security Report for http://testhtml5.vulnweb.com/#/popular. Highest detected risk: None.",
+    "fileName": "Custom_ZAP_Report_testhtml5_vulnweb_com_0eb2f18413584cbfad95eb97d45f80d0.html",
+    "fileType": "text/html",
+    "fileUrl": "http://127.0.0.1:5000/uploads/Custom_ZAP_Report_testhtml5_vulnweb_com_0eb2f18413584cbfad95eb97d45f80d0.html",
+    "source": "zap_report",
+    "highest_risk": "None",
+    "timestamp": 1752428365.2402618
+  },
+  "Custom_ZAP_Report_testphp_vulnweb_com_d65a7b65092547d4bf1ca93af876a446.html": {
+    "title": "Custom Web Scan Report: http://testphp.vulnweb.com/",
+    "description": "Custom ZAP Security Report for http://testphp.vulnweb.com/. Highest detected risk: High.",
+    "fileName": "Custom_ZAP_Report_testphp_vulnweb_com_d65a7b65092547d4bf1ca93af876a446.html",
+    "fileType": "text/html",
+    "fileUrl": "http://127.0.0.1:5000/uploads/Custom_ZAP_Report_testphp_vulnweb_com_d65a7b65092547d4bf1ca93af876a446.html",
+    "source": "zap_report",
+    "highest_risk": "High",
+    "timestamp": 1752651300.3156939
+  },
+  "Custom_ZAP_Report_connectedpakistan_pk_0d8e6a9066714a41b1531de689cdf1f7.html": {
+    "title": "Custom Web Scan Report: https://connectedpakistan.pk/",
+    "description": "Custom ZAP Security Report for https://connectedpakistan.pk/. Highest detected risk: Medium.",
+    "fileName": "Custom_ZAP_Report_connectedpakistan_pk_0d8e6a9066714a41b1531de689cdf1f7.html",
+    "fileType": "text/html",
+    "fileUrl": "http://127.0.0.1:5000/uploads/Custom_ZAP_Report_connectedpakistan_pk_0d8e6a9066714a41b1531de689cdf1f7.html",
+    "source": "zap_report",
+    "highest_risk": "Medium",
+    "timestamp": 1752688483.7124135
+  },
+  "Security Audit Agreement Official Document 1_4dd1329e.pdf": {
+    "title": "Security Audit Agreement",
+    "description": "This agreement initiated the official security audit for Connected Pakistan. It was mutually signed, granting the audit team necessary permissions. And outlining the agreed-upon scope of the assessment.",
+    "fileName": "Security Audit Agreement Official Document 1_4dd1329e.pdf",
+    "fileType": "application/pdf",
+    "fileUrl": "http://127.0.0.1:5000/uploads/Security%20Audit%20Agreement%20Official%20Document%201_4dd1329e.pdf",
+    "source": "manual_upload",
+    "highest_risk": "None",
+    "timestamp": 1752919190.537256
+  },
+  "Password Policy Official Document 2_38720bb6.pdf": {
+    "title": "Password Policy Application Document",
+    "description": "This custom policy specifies the minimum security requirements for all organizational passwords at Connected Pakistan. It guides users in creating strong credentials to protect accounts and data. Designed for clarity, it is simplified for both technical and non-technical staff to easily understand and adhere to.",
+    "fileName": "Password Policy Official Document 2_38720bb6.pdf",
+    "fileType": "application/pdf",
+    "fileUrl": "http://127.0.0.1:5000/uploads/Password%20Policy%20Official%20Document%202_38720bb6.pdf",
+    "source": "manual_upload",
+    "highest_risk": "None",
+    "timestamp": 1752919365.6514778
+  },
+  "Scanning and Enumeration Report Official Document 3_78803108.pdf": {
+    "title": "Scanning and Enumeration Report",
+    "description": "This report details the comprehensive reconnaissance and enumeration phase, utilizing tools such as Nmap and Nikto. It encompasses findings from both internal and external network scans, identifying hosts, open ports, and services. Providing a foundational understanding of the digital footprint and potential attack vectors.",
+    "fileName": "Scanning and Enumeration Report Official Document 3_78803108.pdf",
+    "fileType": "application/pdf",
+    "fileUrl": "http://127.0.0.1:5000/uploads/Scanning%20and%20Enumeration%20Report%20Official%20Document%203_78803108.pdf",
+    "source": "manual_upload",
+    "highest_risk": "None",
+    "timestamp": 1752919522.033772
+  },
+  "Configuration Testing Report Official Document 4_7ee7f1e3.pdf": {
+    "title": "Configuration Testing Report",
+    "description": "This report details the assessment of system and application configurations against security best practices. It validates settings for web servers, firewalls, and software versions for internal and external assets. Ensuring adherence to secure baselines and identifying critical misconfigurations.",
+    "fileName": "Configuration Testing Report Official Document 4_7ee7f1e3.pdf",
+    "fileType": "application/pdf",
+    "fileUrl": "http://127.0.0.1:5000/uploads/Configuration%20Testing%20Report%20Official%20Document%204_7ee7f1e3.pdf",
+    "source": "manual_upload",
+    "highest_risk": "None",
+    "timestamp": 1752919742.7760181
+  },
+  "Connected Pakistan Network Penetesting Official Document 5_097873a7.pdf": {
+    "title": "Network Based Pentesting Report",
+    "description": "This report details the simulated attacks against the network infrastructure, including external and internal segments.Utilizing tools like SEToolkit and conceptual Wi-Fi cracking, it identifies exploitable weaknesses.Highlighting pathways for unauthorized access and potential data exfiltration.",
+    "fileName": "Connected Pakistan Network Penetesting Official Document 5_097873a7.pdf",
+    "fileType": "application/pdf",
+    "fileUrl": "http://127.0.0.1:5000/uploads/Connected%20Pakistan%20Network%20Penetesting%20Official%20Document%205_097873a7.pdf",
+    "source": "manual_upload",
+    "highest_risk": "None",
+    "timestamp": 1752919839.2360709
+  },
+  "Advanced Scan Connected Pakistan_Nessus Report_3a7b4efb.pdf": {
+    "title": "Nessus WebApp Pentesting Report",
+    "description": "This report presents the findings from a comprehensive vulnerability scan conducted using Nessus, an industry-leading and globally recognized tool. It details identified security weaknesses across network hosts and applications, leveraging its extensive vulnerability database.",
+    "fileName": "Advanced Scan Connected Pakistan_Nessus Report_3a7b4efb.pdf",
+    "fileType": "application/pdf",
+    "fileUrl": "http://127.0.0.1:5000/uploads/Advanced%20Scan%20Connected%20Pakistan_Nessus%20Report_3a7b4efb.pdf",
+    "source": "manual_upload",
+    "highest_risk": "None",
+    "timestamp": 1752919996.3778522
+  },
+  "Comprehensive Web Application Security Assessment Official Document 6_ad034143.pdf": {
+    "title": "Comprehensive WebApp PenTesting Report",
+    "description": "This report details the comprehensive web application penetration test, leveraging a multi-tool approach. It integrates findings from our Custom Web Application, OWASP ZAP, Nessus, and Nikto scans. Applicable vulnerabilities were then meticulously analyzed to generate this detailed custom report. Providing tailored solutions and insights for significant web application security enhancement for Connected Pakistan.",
+    "fileName": "Comprehensive Web Application Security Assessment Official Document 6_ad034143.pdf",
+    "fileType": "application/pdf",
+    "fileUrl": "http://127.0.0.1:5000/uploads/Comprehensive%20Web%20Application%20Security%20Assessment%20Official%20Document%206_ad034143.pdf",
+    "source": "manual_upload",
+    "highest_risk": "None",
+    "timestamp": 1752920317.6311572
+  },
+  "Comprehensive Security Assessment Report Final Agreement_e157dfbc.pdf": {
+    "title": "Security Audit Report (Final)",
+    "description": "This Final Comprehensive Security Audit Report consolidates all findings from the web application, network, configuration, and physical security assessments. It presents a holistic and integrated overview of the organization's entire security posture. Providing a definitive set of prioritized recommendations for strategic security enhancement and risk mitigation for Connected Pakistan",
+    "fileName": "Comprehensive Security Assessment Report Final Agreement_e157dfbc.pdf",
+    "fileType": "application/pdf",
+    "fileUrl": "http://127.0.0.1:5000/uploads/Comprehensive%20Security%20Assessment%20Report%20Final%20Agreement_e157dfbc.pdf",
+    "source": "manual_upload",
+    "highest_risk": "None",
+    "timestamp": 1752920434.8989272
+  },
+  "Custom_ZAP_Report_testphp_vulnweb_com_06d22def73724d359da1a01712021d20.html": {
+    "title": "Custom Web Scan Report: http://testphp.vulnweb.com/",
+    "description": "Custom ZAP Security Report for http://testphp.vulnweb.com/. Highest detected risk: High.",
+    "fileName": "Custom_ZAP_Report_testphp_vulnweb_com_06d22def73724d359da1a01712021d20.html",
+    "fileType": "text/html",
+    "fileUrl": "http://127.0.0.1:5000/uploads/Custom_ZAP_Report_testphp_vulnweb_com_06d22def73724d359da1a01712021d20.html",
+    "source": "zap_report",
+    "highest_risk": "High",
+    "timestamp": 1753017198.262326
+  },
+  "Custom_Report_custom.html": {
+    "title": "Custom Security Report: http://rest.vulnweb.com/",
+    "description": "Custom Security Report for http://rest.vulnweb.com/. Highest detected risk: Medium.",
+    "fileName": "Custom_Report_custom.html",
+    "fileType": "text/html",
+    "fileUrl": "http://127.0.0.1:5000/reports/Custom_Report_custom.html",
+    "source": "zap_report",
+    "highest_risk": "medium",
+    "timestamp": 1753518183.7659822
+  },
+  "CyberGuard_6Risk_Report_http___rest_vulnweb_com__1753515387.html": {
+    "title": "CyberGuard 6-Risk Matrix Report: http://rest.vulnweb.com/",
+    "description": "CyberGuard 6-Risk Matrix Report for http://rest.vulnweb.com/. Highest detected risk: Medium.",
+    "fileName": "CyberGuard_6Risk_Report_http___rest_vulnweb_com__1753515387.html",
+    "fileType": "text/html",
+    "fileUrl": "http://127.0.0.1:5000/reports/CyberGuard_6Risk_Report_http___rest_vulnweb_com__1753515387.html",
+    "source": "zap_report",
+    "highest_risk": "medium",
+    "timestamp": 1753515387.3943665
+  },
+  "CyberGuard_6Risk_Report_http___rest_vulnweb_com__1753515732.html": {
+    "title": "CyberGuard 6-Risk Matrix Report: http://rest.vulnweb.com/",
+    "description": "CyberGuard 6-Risk Matrix Report for http://rest.vulnweb.com/. Highest detected risk: Medium.",
+    "fileName": "CyberGuard_6Risk_Report_http___rest_vulnweb_com__1753515732.html",
+    "fileType": "text/html",
+    "fileUrl": "http://127.0.0.1:5000/reports/CyberGuard_6Risk_Report_http___rest_vulnweb_com__1753515732.html",
+    "source": "zap_report",
+    "highest_risk": "medium",
+    "timestamp": 1753515732.1589663
+  },
+  "CyberGuard_6Risk_Report_http___rest_vulnweb_com__1753516884.html": {
+    "title": "CyberGuard 6-Risk Matrix Report: http://rest.vulnweb.com/",
+    "description": "CyberGuard 6-Risk Matrix Report for http://rest.vulnweb.com/. Highest detected risk: Medium.",
+    "fileName": "CyberGuard_6Risk_Report_http___rest_vulnweb_com__1753516884.html",
+    "fileType": "text/html",
+    "fileUrl": "http://127.0.0.1:5000/reports/CyberGuard_6Risk_Report_http___rest_vulnweb_com__1753516884.html",
+    "source": "zap_report",
+    "highest_risk": "medium",
+    "timestamp": 1753516884.3769999
+  },
+  "CyberGuard_6Risk_Report_http___rest_vulnweb_com__1753517195.html": {
+    "title": "CyberGuard 6-Risk Matrix Report: http://rest.vulnweb.com/",
+    "description": "CyberGuard 6-Risk Matrix Report for http://rest.vulnweb.com/. Highest detected risk: Medium.",
+    "fileName": "CyberGuard_6Risk_Report_http___rest_vulnweb_com__1753517195.html",
+    "fileType": "text/html",
+    "fileUrl": "http://127.0.0.1:5000/reports/CyberGuard_6Risk_Report_http___rest_vulnweb_com__1753517195.html",
+    "source": "zap_report",
+    "highest_risk": "medium",
+    "timestamp": 1753517195.5437639
+  },
+  "CyberGuard_6Risk_Report_http___rest_vulnweb_com__1753517740.html": {
+    "title": "CyberGuard 6-Risk Matrix Report: http://rest.vulnweb.com/",
+    "description": "CyberGuard 6-Risk Matrix Report for http://rest.vulnweb.com/. Highest detected risk: Medium.",
+    "fileName": "CyberGuard_6Risk_Report_http___rest_vulnweb_com__1753517740.html",
+    "fileType": "text/html",
+    "fileUrl": "http://127.0.0.1:5000/reports/CyberGuard_6Risk_Report_http___rest_vulnweb_com__1753517740.html",
+    "source": "zap_report",
+    "highest_risk": "medium",
+    "timestamp": 1753517740.9756746
+  },
+  "CyberGuard_6Risk_Report_http___rest_vulnweb_com__1753518380.html": {
+    "title": "CyberGuard 6-Risk Matrix Report: http://rest.vulnweb.com/",
+    "description": "CyberGuard 6-Risk Matrix Report for http://rest.vulnweb.com/. Highest detected risk: Medium.",
+    "fileName": "CyberGuard_6Risk_Report_http___rest_vulnweb_com__1753518380.html",
+    "fileType": "text/html",
+    "fileUrl": "http://127.0.0.1:5000/reports/CyberGuard_6Risk_Report_http___rest_vulnweb_com__1753518380.html",
+    "source": "zap_report",
+    "highest_risk": "medium",
+    "timestamp": 1753518380.110684
+  },
+  "Light_Custom_Report_http___rest_vulnweb_com__1753535593.html": {
+    "title": "Light Custom Security Report: http://rest.vulnweb.com/",
+    "description": "Light Custom Security Report for http://rest.vulnweb.com/. Highest detected risk: Medium.",
+    "fileName": "Light_Custom_Report_http___rest_vulnweb_com__1753535593.html",
+    "fileType": "text/html",
+    "fileUrl": "http://127.0.0.1:5000/reports/Light_Custom_Report_http___rest_vulnweb_com__1753535593.html",
+    "source": "zap_report",
+    "highest_risk": "medium",
+    "timestamp": 1753535593.0782018
+  },
+  "Light_Custom_Report_http___rest_vulnweb_com__1753537101.html": {
+    "title": "Light Custom Security Report: http://rest.vulnweb.com/",
+    "description": "Light Custom Security Report for http://rest.vulnweb.com/. Highest detected risk: Medium.",
+    "fileName": "Light_Custom_Report_http___rest_vulnweb_com__1753537101.html",
+    "fileType": "text/html",
+    "fileUrl": "http://127.0.0.1:5000/reports/Light_Custom_Report_http___rest_vulnweb_com__1753537101.html",
+    "source": "zap_report",
+    "highest_risk": "medium",
+    "timestamp": 1753537101.4686491
+  },
+  "Dark_Custom_Report_dark_custom.html": {
+    "title": "ZAP Native Report: http://testphp.vulnweb.com/",
+    "description": "ZAP Native Report for http://testphp.vulnweb.com/. Highest detected risk: High.",
+    "fileName": "Dark_Custom_Report_dark_custom.html",
+    "fileType": "text/html",
+    "fileUrl": "http://127.0.0.1:5000/reports/Dark_Custom_Report_dark_custom.html",
+    "source": "zap_report",
+    "highest_risk": "high",
+    "timestamp": 1754378243.361108
+  },
+  "Light_Custom_Report_http___rest_vulnweb_com__1753612966.html": {
+    "title": "Light Custom Security Report: http://rest.vulnweb.com/",
+    "description": "Light Custom Security Report for http://rest.vulnweb.com/. Highest detected risk: Medium.",
+    "fileName": "Light_Custom_Report_http___rest_vulnweb_com__1753612966.html",
+    "fileType": "text/html",
+    "fileUrl": "http://127.0.0.1:5000/reports/Light_Custom_Report_http___rest_vulnweb_com__1753612966.html",
+    "source": "zap_report",
+    "highest_risk": "medium",
+    "timestamp": 1753612966.592107
+  },
+  "Light_Custom_Report_http___rest_vulnweb_com__1753783404.html": {
+    "title": "Light Custom Security Report: http://rest.vulnweb.com/",
+    "description": "Light Custom Security Report for http://rest.vulnweb.com/. Highest detected risk: Medium.",
+    "fileName": "Light_Custom_Report_http___rest_vulnweb_com__1753783404.html",
+    "fileType": "text/html",
+    "fileUrl": "http://127.0.0.1:5000/reports/Light_Custom_Report_http___rest_vulnweb_com__1753783404.html",
+    "source": "zap_report",
+    "highest_risk": "medium",
+    "timestamp": 1753783404.1276946
+  }
+}

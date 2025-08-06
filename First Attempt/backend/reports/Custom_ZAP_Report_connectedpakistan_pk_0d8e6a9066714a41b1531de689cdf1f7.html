@@ -1,0 +1,202 @@
+
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Custom Security Report for https://connectedpakistan.pk/</title>
+            <script src="https://cdn.tailwindcss.com"></script>
+            <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+            <style>
+                /* Dark/Pink Theme */
+                body { 
+                    font-family: 'Inter', sans-serif; 
+                    background-color: #1a1a2e; /* Dark background */
+                    color: #e0e0e0; /* Light text */
+                    line-height: 1.6; 
+                }
+                .container { 
+                    max-width: 960px; 
+                    margin: 2rem auto; 
+                    padding: 2rem; 
+                    background-color: #2a2a4a; /* Slightly lighter dark for container */
+                    border-radius: 0.75rem; 
+                    box-shadow: 0 8px 20px rgba(0,0,0,0.3); /* More pronounced shadow */
+                }
+                h1, h2, h3 { 
+                    color: #e94560; /* Pink accent for headings */
+                    margin-bottom: 1rem; 
+                }
+                h1 { 
+                    font-size: 2.5rem; 
+                    text-align: center; 
+                    color: #e94560; /* Pink accent */
+                }
+                h2 { 
+                    font-size: 1.8rem; 
+                    border-bottom: 2px solid #5a5a7a; /* Darker border */
+                    padding-bottom: 0.5rem; 
+                    margin-top: 2rem; 
+                }
+                h3 { 
+                    font-size: 1.4rem; 
+                    color: #e94560; /* Pink accent */
+                }
+                .alert-card { 
+                    background-color: #3a3a5a; /* Darker card background */
+                    border: 1px solid #5a5a7a; 
+                    border-radius: 0.5rem; 
+                    padding: 1.5rem; 
+                    margin-bottom: 1.5rem; 
+                }
+                .alert-card p { margin-bottom: 0.5rem; }
+                .alert-card strong { color: #ffffff; } /* White for strong text */
+                .summary-item { 
+                    display: flex; 
+                    justify-content: space-between; 
+                    padding: 0.5rem 0; 
+                    border-bottom: 1px dashed #5a5a7a; 
+                }
+                .summary-item:last-child { border-bottom: none; }
+                /* Risk colors - adjusted for dark background */
+                .risk-critical { color: #ff6b6b; font-weight: 700; } /* Brighter red */
+                .risk-high { color: #ff9f43; font-weight: 700; } /* Brighter orange */
+                .risk-medium { color: #ffe66d; font-weight: 700; } /* Brighter yellow */
+                .risk-low { color: #6be0ff; font-weight: 700; } /* Brighter blue/cyan */
+                .risk-informational { color: #98d8f0; font-weight: 600; } /* Lighter blue */
+                .risk-none { background-color: #28a745; color: #ffffff; padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-weight: 600; } /* Green for No Risk */
+                pre { 
+                    background-color: #2a2a4a; /* Darker pre background */
+                    padding: 1rem; 
+                    border-radius: 0.5rem; 
+                    overflow-x: auto; 
+                    font-size: 0.875rem; 
+                    color: #c0c0c0; /* Lighter grey for code */
+                }
+                a { color: #e94560; /* Pink links */ }
+                a:hover { text-decoration: underline; }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <h1>Custom Security Report for https://connectedpakistan.pk/</h1>
+                <p class="text-center text-gray-400 mb-6">Generated on: 2025-07-16 22:54:43</p>
+
+                <h2>Summary of Vulnerabilities</h2>
+                <div class="bg-gray-800 p-6 rounded-lg shadow-inner mb-6">
+                    <div class="summary-item"><span>Critical:</span> <span class="risk-critical">0</span></div>
+                    <div class="summary-item"><span>High:</span> <span class="risk-high">0</span></div>
+                    <div class="summary-item"><span>Medium:</span> <span class="risk-medium">2</span></div>
+                    <div class="summary-item"><span>Low:</span> <span class="risk-low">5</span></div>
+                    <div class="summary-item"><span>Informational:</span> <span class="risk-informational">3</span></div>
+                    <div class="summary-item"><span>No Risk:</span> <span class="risk-none">0</span></div>
+                </div>
+
+                <h2>Detailed Alerts</h2>
+        
+                <div class="alert-card">
+                    <h3 class="risk-medium">Missing Anti-clickjacking Header (Medium)</h3>
+                    <p><strong>URL:</strong> <a href="https://connectedpakistan.pk/" target="_blank" class="hover:underline">https://connectedpakistan.pk/</a></p>
+                    <p><strong>Confidence:</strong> Medium</p>
+                    <p><strong>Description:</strong></p>
+                    <pre>The response does not protect against &#x27;ClickJacking&#x27; attacks. It should include either Content-Security-Policy with &#x27;frame-ancestors&#x27; directive or X-Frame-Options.</pre>
+                    <p><strong>Solution:</strong></p>
+                    <pre>Modern Web browsers support the Content-Security-Policy and X-Frame-Options HTTP headers. Ensure one of them is set on all web pages returned by your site/app.
+If you expect the page to be framed only by pages on your server (e.g. it&#x27;s part of a FRAMESET) then you&#x27;ll want to use SAMEORIGIN, otherwise if you never expect the page to be framed, you should use DENY. Alternatively consider implementing Content Security Policy&#x27;s &quot;frame-ancestors&quot; directive.</pre>
+                </div>
+                
+                <div class="alert-card">
+                    <h3 class="risk-informational">Re-examine Cache-control Directives (Informational)</h3>
+                    <p><strong>URL:</strong> <a href="https://connectedpakistan.pk/" target="_blank" class="hover:underline">https://connectedpakistan.pk/</a></p>
+                    <p><strong>Confidence:</strong> Low</p>
+                    <p><strong>Description:</strong></p>
+                    <pre>The cache-control header has not been set properly or is missing, allowing the browser and proxies to cache content. For static assets like css, js, or image files this might be intended, however, the resources should be reviewed to ensure that no sensitive content will be cached.</pre>
+                    <p><strong>Solution:</strong></p>
+                    <pre>For secure content, ensure the cache-control HTTP header is set with &quot;no-cache, no-store, must-revalidate&quot;. If an asset should be cached consider setting the directives &quot;public, max-age, immutable&quot;.</pre>
+                </div>
+                
+                <div class="alert-card">
+                    <h3 class="risk-medium">Content Security Policy (CSP) Header Not Set (Medium)</h3>
+                    <p><strong>URL:</strong> <a href="https://connectedpakistan.pk/" target="_blank" class="hover:underline">https://connectedpakistan.pk/</a></p>
+                    <p><strong>Confidence:</strong> High</p>
+                    <p><strong>Description:</strong></p>
+                    <pre>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross Site Scripting (XSS) and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page — covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</pre>
+                    <p><strong>Solution:</strong></p>
+                    <pre>Ensure that your web server, application server, load balancer, etc. is configured to set the Content-Security-Policy header.</pre>
+                </div>
+                
+                <div class="alert-card">
+                    <h3 class="risk-low">Cross-Domain JavaScript Source File Inclusion (Low)</h3>
+                    <p><strong>URL:</strong> <a href="https://connectedpakistan.pk/" target="_blank" class="hover:underline">https://connectedpakistan.pk/</a></p>
+                    <p><strong>Confidence:</strong> Medium</p>
+                    <p><strong>Description:</strong></p>
+                    <pre>The page includes one or more script files from a third-party domain.</pre>
+                    <p><strong>Solution:</strong></p>
+                    <pre>Ensure JavaScript source files are loaded from only trusted sources, and the sources can&#x27;t be controlled by end users of the application.</pre>
+                </div>
+                
+                <div class="alert-card">
+                    <h3 class="risk-low">Cross-Domain JavaScript Source File Inclusion (Low)</h3>
+                    <p><strong>URL:</strong> <a href="https://connectedpakistan.pk/" target="_blank" class="hover:underline">https://connectedpakistan.pk/</a></p>
+                    <p><strong>Confidence:</strong> Medium</p>
+                    <p><strong>Description:</strong></p>
+                    <pre>The page includes one or more script files from a third-party domain.</pre>
+                    <p><strong>Solution:</strong></p>
+                    <pre>Ensure JavaScript source files are loaded from only trusted sources, and the sources can&#x27;t be controlled by end users of the application.</pre>
+                </div>
+                
+                <div class="alert-card">
+                    <h3 class="risk-informational">Information Disclosure - Suspicious Comments (Informational)</h3>
+                    <p><strong>URL:</strong> <a href="https://connectedpakistan.pk/" target="_blank" class="hover:underline">https://connectedpakistan.pk/</a></p>
+                    <p><strong>Confidence:</strong> Low</p>
+                    <p><strong>Description:</strong></p>
+                    <pre>The response appears to contain suspicious comments which may help an attacker.</pre>
+                    <p><strong>Solution:</strong></p>
+                    <pre>Remove all comments that return information that may help an attacker and fix any underlying problems they refer to.</pre>
+                </div>
+                
+                <div class="alert-card">
+                    <h3 class="risk-informational">Modern Web Application (Informational)</h3>
+                    <p><strong>URL:</strong> <a href="https://connectedpakistan.pk/" target="_blank" class="hover:underline">https://connectedpakistan.pk/</a></p>
+                    <p><strong>Confidence:</strong> Medium</p>
+                    <p><strong>Description:</strong></p>
+                    <pre>The application appears to be a modern web application. If you need to explore it automatically then the Ajax Spider may well be more effective than the standard one.</pre>
+                    <p><strong>Solution:</strong></p>
+                    <pre>This is an informational alert and so no changes are required.</pre>
+                </div>
+                
+                <div class="alert-card">
+                    <h3 class="risk-low">Strict-Transport-Security Header Not Set (Low)</h3>
+                    <p><strong>URL:</strong> <a href="https://connectedpakistan.pk/" target="_blank" class="hover:underline">https://connectedpakistan.pk/</a></p>
+                    <p><strong>Confidence:</strong> High</p>
+                    <p><strong>Description:</strong></p>
+                    <pre>HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.</pre>
+                    <p><strong>Solution:</strong></p>
+                    <pre>Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.</pre>
+                </div>
+                
+                <div class="alert-card">
+                    <h3 class="risk-low">Timestamp Disclosure - Unix (Low)</h3>
+                    <p><strong>URL:</strong> <a href="https://connectedpakistan.pk/" target="_blank" class="hover:underline">https://connectedpakistan.pk/</a></p>
+                    <p><strong>Confidence:</strong> Low</p>
+                    <p><strong>Description:</strong></p>
+                    <pre>A timestamp was disclosed by the application/web server. - Unix</pre>
+                    <p><strong>Solution:</strong></p>
+                    <pre>Manually confirm that the timestamp data is not sensitive, and that the data cannot be aggregated to disclose exploitable patterns.</pre>
+                </div>
+                
+                <div class="alert-card">
+                    <h3 class="risk-low">X-Content-Type-Options Header Missing (Low)</h3>
+                    <p><strong>URL:</strong> <a href="https://connectedpakistan.pk/" target="_blank" class="hover:underline">https://connectedpakistan.pk/</a></p>
+                    <p><strong>Confidence:</strong> Medium</p>
+                    <p><strong>Description:</strong></p>
+                    <pre>The Anti-MIME-Sniffing header X-Content-Type-Options was not set to &#x27;nosniff&#x27;. This allows older versions of Internet Explorer and Chrome to perform MIME-sniffing on the response body, potentially causing the response body to be interpreted and displayed as a content type other than the declared content type. Current (early 2014) and legacy versions of Firefox will use the declared content type (if one is set), rather than performing MIME-sniffing.</pre>
+                    <p><strong>Solution:</strong></p>
+                    <pre>Ensure that the application/web server sets the Content-Type header appropriately, and that it sets the X-Content-Type-Options header to &#x27;nosniff&#x27; for all web pages.
+If possible, ensure that the end user uses a standards-compliant and modern web browser that does not perform MIME-sniffing at all, or that can be directed by the web application/web server to not perform MIME-sniffing.</pre>
+                </div>
+                
+            </div>
+        </body>
+        </html>
+        

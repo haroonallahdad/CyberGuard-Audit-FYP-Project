@@ -1,0 +1,241 @@
+
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Custom Security Report for http://testphp.vulnweb.com/</title>
+            <script src="https://cdn.tailwindcss.com"></script>
+            <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+            <style>
+                /* Dark/Pink Theme */
+                body { 
+                    font-family: 'Inter', sans-serif; 
+                    background-color: #1a1a2e; /* Dark background */
+                    color: #e0e0e0; /* Light text */
+                    line-height: 1.6; 
+                }
+                .container { 
+                    max-width: 960px; 
+                    margin: 2rem auto; 
+                    padding: 2rem; 
+                    background-color: #2a2a4a; /* Slightly lighter dark for container */
+                    border-radius: 0.75rem; 
+                    box-shadow: 0 8px 20px rgba(0,0,0,0.3); /* More pronounced shadow */
+                }
+                h1, h2, h3 { 
+                    color: #e94560; /* Pink accent for headings */
+                    margin-bottom: 1rem; 
+                }
+                h1 { 
+                    font-size: 2.5rem; 
+                    text-align: center; 
+                    color: #e94560; /* Pink accent */
+                }
+                h2 { 
+                    font-size: 1.8rem; 
+                    border-bottom: 2px solid #5a5a7a; /* Darker border */
+                    padding-bottom: 0.5rem; 
+                    margin-top: 2rem; 
+                }
+                h3 { 
+                    font-size: 1.4rem; 
+                    color: #e94560; /* Pink accent */
+                }
+                .alert-card { 
+                    background-color: #3a3a5a; /* Darker card background */
+                    border: 1px solid #5a5a7a; 
+                    border-radius: 0.5rem; 
+                    padding: 1.5rem; 
+                    margin-bottom: 1.5rem; 
+                }
+                .alert-card p { margin-bottom: 0.5rem; }
+                .alert-card strong { color: #ffffff; } /* White for strong text */
+                .summary-item { 
+                    display: flex; 
+                    justify-content: space-between; 
+                    padding: 0.5rem 0; 
+                    border-bottom: 1px dashed #5a5a7a; 
+                }
+                .summary-item:last-child { border-bottom: none; }
+                /* Risk colors - adjusted for dark background */
+                .risk-critical { color: #ff6b6b; font-weight: 700; } /* Brighter red */
+                .risk-high { color: #ff9f43; font-weight: 700; } /* Brighter orange */
+                .risk-medium { color: #ffe66d; font-weight: 700; } /* Brighter yellow */
+                .risk-low { color: #6be0ff; font-weight: 700; } /* Brighter blue/cyan */
+                .risk-informational { color: #98d8f0; font-weight: 600; } /* Lighter blue */
+                .risk-none { background-color: #28a745; color: #ffffff; padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-weight: 600; } /* Green for No Risk */
+                pre { 
+                    background-color: #2a2a4a; /* Darker pre background */
+                    padding: 1rem; 
+                    border-radius: 0.5rem; 
+                    overflow-x: auto; 
+                    font-size: 0.875rem; 
+                    color: #c0c0c0; /* Lighter grey for code */
+                }
+                a { color: #e94560; /* Pink links */ }
+                a:hover { text-decoration: underline; }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <h1>Custom Security Report for http://testphp.vulnweb.com/</h1>
+                <p class="text-center text-gray-400 mb-6">Generated on: 2025-07-16 12:35:00</p>
+
+                <h2>Summary of Vulnerabilities</h2>
+                <div class="bg-gray-800 p-6 rounded-lg shadow-inner mb-6">
+                    <div class="summary-item"><span>Critical:</span> <span class="risk-critical">0</span></div>
+                    <div class="summary-item"><span>High:</span> <span class="risk-high">1</span></div>
+                    <div class="summary-item"><span>Medium:</span> <span class="risk-medium">3</span></div>
+                    <div class="summary-item"><span>Low:</span> <span class="risk-low">3</span></div>
+                    <div class="summary-item"><span>Informational:</span> <span class="risk-informational">1</span></div>
+                    <div class="summary-item"><span>No Risk:</span> <span class="risk-none">0</span></div>
+                </div>
+
+                <h2>Detailed Alerts</h2>
+        
+                <div class="alert-card">
+                    <h3 class="risk-medium">Missing Anti-clickjacking Header (Medium)</h3>
+                    <p><strong>URL:</strong> <a href="http://testphp.vulnweb.com/" target="_blank" class="hover:underline">http://testphp.vulnweb.com/</a></p>
+                    <p><strong>Confidence:</strong> Medium</p>
+                    <p><strong>Description:</strong></p>
+                    <pre>The response does not protect against &#x27;ClickJacking&#x27; attacks. It should include either Content-Security-Policy with &#x27;frame-ancestors&#x27; directive or X-Frame-Options.</pre>
+                    <p><strong>Solution:</strong></p>
+                    <pre>Modern Web browsers support the Content-Security-Policy and X-Frame-Options HTTP headers. Ensure one of them is set on all web pages returned by your site/app.
+If you expect the page to be framed only by pages on your server (e.g. it&#x27;s part of a FRAMESET) then you&#x27;ll want to use SAMEORIGIN, otherwise if you never expect the page to be framed, you should use DENY. Alternatively consider implementing Content Security Policy&#x27;s &quot;frame-ancestors&quot; directive.</pre>
+                </div>
+                
+                <div class="alert-card">
+                    <h3 class="risk-informational">Charset Mismatch (Header Versus Meta Content-Type Charset) (Informational)</h3>
+                    <p><strong>URL:</strong> <a href="http://testphp.vulnweb.com/" target="_blank" class="hover:underline">http://testphp.vulnweb.com/</a></p>
+                    <p><strong>Confidence:</strong> Low</p>
+                    <p><strong>Description:</strong></p>
+                    <pre>This check identifies responses where the HTTP Content-Type header declares a charset different from the charset defined by the body of the HTML or XML. When there&#x27;s a charset mismatch between the HTTP header and content body Web browsers can be forced into an undesirable content-sniffing mode to determine the content&#x27;s correct character set.
+
+An attacker could manipulate content on the page to be interpreted in an encoding of their choice. For example, if an attacker can control content at the beginning of the page, they could inject script using UTF-7 encoded text and manipulate some browsers into interpreting that text.</pre>
+                    <p><strong>Solution:</strong></p>
+                    <pre>Force UTF-8 for all text content in both the HTTP header and meta tags in HTML or encoding declarations in XML.</pre>
+                </div>
+                
+                <div class="alert-card">
+                    <h3 class="risk-medium">Content Security Policy (CSP) Header Not Set (Medium)</h3>
+                    <p><strong>URL:</strong> <a href="http://testphp.vulnweb.com/" target="_blank" class="hover:underline">http://testphp.vulnweb.com/</a></p>
+                    <p><strong>Confidence:</strong> High</p>
+                    <p><strong>Description:</strong></p>
+                    <pre>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross Site Scripting (XSS) and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page — covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</pre>
+                    <p><strong>Solution:</strong></p>
+                    <pre>Ensure that your web server, application server, load balancer, etc. is configured to set the Content-Security-Policy header.</pre>
+                </div>
+                
+                <div class="alert-card">
+                    <h3 class="risk-medium">Absence of Anti-CSRF Tokens (Medium)</h3>
+                    <p><strong>URL:</strong> <a href="http://testphp.vulnweb.com/" target="_blank" class="hover:underline">http://testphp.vulnweb.com/</a></p>
+                    <p><strong>Confidence:</strong> Low</p>
+                    <p><strong>Description:</strong></p>
+                    <pre>No Anti-CSRF tokens were found in a HTML submission form.
+A cross-site request forgery is an attack that involves forcing a victim to send an HTTP request to a target destination without their knowledge or intent in order to perform an action as the victim. The underlying cause is application functionality using predictable URL/form actions in a repeatable way. The nature of the attack is that CSRF exploits the trust that a web site has for a user. By contrast, cross-site scripting (XSS) exploits the trust that a user has for a web site. Like XSS, CSRF attacks are not necessarily cross-site, but they can be. Cross-site request forgery is also known as CSRF, XSRF, one-click attack, session riding, confused deputy, and sea surf.
+
+CSRF attacks are effective in a number of situations, including:
+    * The victim has an active session on the target site.
+    * The victim is authenticated via HTTP auth on the target site.
+    * The victim is on the same local network as the target site.
+
+CSRF has primarily been used to perform an action against a target site using the victim&#x27;s privileges, but recent techniques have been discovered to disclose information by gaining access to the response. The risk of information disclosure is dramatically increased when the target site is vulnerable to XSS, because XSS can be used as a platform for CSRF, allowing the attack to operate within the bounds of the same-origin policy.</pre>
+                    <p><strong>Solution:</strong></p>
+                    <pre>Phase: Architecture and Design
+Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid.
+For example, use anti-CSRF packages such as the OWASP CSRFGuard.
+
+Phase: Implementation
+Ensure that your application is free of cross-site scripting issues, because most CSRF defenses can be bypassed using attacker-controlled script.
+
+Phase: Architecture and Design
+Generate a unique nonce for each form, place the nonce into the form, and verify the nonce upon receipt of the form. Be sure that the nonce is not predictable (CWE-330).
+Note that this can be bypassed using XSS.
+
+Identify especially dangerous operations. When the user performs a dangerous operation, send a separate confirmation request to ensure that the user intended to perform that operation.
+Note that this can be bypassed using XSS.
+
+Use the ESAPI Session Management control.
+This control includes a component for CSRF.
+
+Do not use the GET method for any request that triggers a state change.
+
+Phase: Implementation
+Check the HTTP Referer header to see if the request originated from an expected page. This could break legitimate functionality, because users or proxies may have disabled sending the Referer for privacy reasons.</pre>
+                </div>
+                
+                <div class="alert-card">
+                    <h3 class="risk-low">Server Leaks Version Information via &quot;Server&quot; HTTP Response Header Field (Low)</h3>
+                    <p><strong>URL:</strong> <a href="http://testphp.vulnweb.com/" target="_blank" class="hover:underline">http://testphp.vulnweb.com/</a></p>
+                    <p><strong>Confidence:</strong> High</p>
+                    <p><strong>Description:</strong></p>
+                    <pre>The web/application server is leaking version information via the &quot;Server&quot; HTTP response header. Access to such information may facilitate attackers identifying other vulnerabilities your web/application server is subject to.</pre>
+                    <p><strong>Solution:</strong></p>
+                    <pre>Ensure that your web server, application server, load balancer, etc. is configured to suppress the &quot;Server&quot; header or provide generic details.</pre>
+                </div>
+                
+                <div class="alert-card">
+                    <h3 class="risk-low">X-Content-Type-Options Header Missing (Low)</h3>
+                    <p><strong>URL:</strong> <a href="http://testphp.vulnweb.com/" target="_blank" class="hover:underline">http://testphp.vulnweb.com/</a></p>
+                    <p><strong>Confidence:</strong> Medium</p>
+                    <p><strong>Description:</strong></p>
+                    <pre>The Anti-MIME-Sniffing header X-Content-Type-Options was not set to &#x27;nosniff&#x27;. This allows older versions of Internet Explorer and Chrome to perform MIME-sniffing on the response body, potentially causing the response body to be interpreted and displayed as a content type other than the declared content type. Current (early 2014) and legacy versions of Firefox will use the declared content type (if one is set), rather than performing MIME-sniffing.</pre>
+                    <p><strong>Solution:</strong></p>
+                    <pre>Ensure that the application/web server sets the Content-Type header appropriately, and that it sets the X-Content-Type-Options header to &#x27;nosniff&#x27; for all web pages.
+If possible, ensure that the end user uses a standards-compliant and modern web browser that does not perform MIME-sniffing at all, or that can be directed by the web application/web server to not perform MIME-sniffing.</pre>
+                </div>
+                
+                <div class="alert-card">
+                    <h3 class="risk-low">Server Leaks Information via &quot;X-Powered-By&quot; HTTP Response Header Field(s) (Low)</h3>
+                    <p><strong>URL:</strong> <a href="http://testphp.vulnweb.com/" target="_blank" class="hover:underline">http://testphp.vulnweb.com/</a></p>
+                    <p><strong>Confidence:</strong> Medium</p>
+                    <p><strong>Description:</strong></p>
+                    <pre>The web/application server is leaking information via one or more &quot;X-Powered-By&quot; HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to.</pre>
+                    <p><strong>Solution:</strong></p>
+                    <pre>Ensure that your web server, application server, load balancer, etc. is configured to suppress &quot;X-Powered-By&quot; headers.</pre>
+                </div>
+                
+                <div class="alert-card">
+                    <h3 class="risk-high">Cross Site Scripting (DOM Based) (High)</h3>
+                    <p><strong>URL:</strong> <a href="http://testphp.vulnweb.com/#jaVasCript:/*-/*`/*\`/*&#x27;/*&quot;/**/(/* */oNcliCk=alert(5397) )//%0D%0A%0d%0a//&lt;/stYle/&lt;/titLe/&lt;/teXtarEa/&lt;/scRipt/--!&gt;\x3csVg/&lt;sVg/oNloAd=alert(5397)//&gt;\x3e" target="_blank" class="hover:underline">http://testphp.vulnweb.com/#jaVasCript:/*-/*`/*\`/*&#x27;/*&quot;/**/(/* */oNcliCk=alert(5397) )//%0D%0A%0d%0a//&lt;/stYle/&lt;/titLe/&lt;/teXtarEa/&lt;/scRipt/--!&gt;\x3csVg/&lt;sVg/oNloAd=alert(5397)//&gt;\x3e</a></p>
+                    <p><strong>Confidence:</strong> High</p>
+                    <p><strong>Description:</strong></p>
+                    <pre>Cross-site Scripting (XSS) is an attack technique that involves echoing attacker-supplied code into a user&#x27;s browser instance. A browser instance can be a standard web browser client, or a browser object embedded in a software product such as the browser within WinAmp, an RSS reader, or an email client. The code itself is usually written in HTML/JavaScript, but may also extend to VBScript, ActiveX, Java, Flash, or any other browser-supported technology.
+When an attacker gets a user&#x27;s browser to execute his/her code, the code will run within the security context (or zone) of the hosting web site. With this level of privilege, the code has the ability to read, modify and transmit any sensitive data accessible by the browser. A Cross-site Scripted user could have his/her account hijacked (cookie theft), their browser redirected to another location, or possibly shown fraudulent content delivered by the web site they are visiting. Cross-site Scripting attacks essentially compromise the trust relationship between a user and the web site. Applications utilizing browser object instances which load content from the file system may execute code under the local machine zone allowing for system compromise.
+
+There are three types of Cross-site Scripting attacks: non-persistent, persistent and DOM-based.
+Non-persistent attacks and DOM-based attacks require a user to either visit a specially crafted link laced with malicious code, or visit a malicious web page containing a web form, which when posted to the vulnerable site, will mount the attack. Using a malicious form will oftentimes take place when the vulnerable resource only accepts HTTP POST requests. In such a case, the form can be submitted automatically, without the victim&#x27;s knowledge (e.g. by using JavaScript). Upon clicking on the malicious link or submitting the malicious form, the XSS payload will get echoed back and will get interpreted by the user&#x27;s browser and execute. Another technique to send almost arbitrary requests (GET and POST) is by using an embedded client, such as Adobe Flash.
+Persistent attacks occur when the malicious code is submitted to a web site where it&#x27;s stored for a period of time. Examples of an attacker&#x27;s favorite targets often include message board posts, web mail messages, and web chat software. The unsuspecting user is not required to interact with any additional site/link (e.g. an attacker site or a malicious link sent via email), just simply view the web page containing the code.</pre>
+                    <p><strong>Solution:</strong></p>
+                    <pre>Phase: Architecture and Design
+Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid.
+Examples of libraries and frameworks that make it easier to generate properly encoded output include Microsoft&#x27;s Anti-XSS library, the OWASP ESAPI Encoding module, and Apache Wicket.
+
+Phases: Implementation; Architecture and Design
+Understand the context in which your data will be used and the encoding that will be expected. This is especially important when transmitting data between different components, or when generating outputs that can contain multiple encodings at the same time, such as web pages or multi-part mail messages. Study all expected communication protocols and data representations to determine the required encoding strategies.
+For any data that will be output to another web page, especially any data that was received from external inputs, use the appropriate encoding on all non-alphanumeric characters.
+Consult the XSS Prevention Cheat Sheet for more details on the types of encoding and escaping that are needed.
+
+Phase: Architecture and Design
+For any security checks that are performed on the client side, ensure that these checks are duplicated on the server side, in order to avoid CWE-602. Attackers can bypass the client-side checks by modifying values after the checks have been performed, or by changing the client to remove the client-side checks entirely. Then, these modified values would be submitted to the server.
+
+If available, use structured mechanisms that automatically enforce the separation between data and code. These mechanisms may be able to provide the relevant quoting, encoding, and validation automatically, instead of relying on the developer to provide this capability at every point where output is generated.
+
+Phase: Implementation
+For every web page that is generated, use and specify a character encoding such as ISO-8859-1 or UTF-8. When an encoding is not specified, the web browser may choose a different encoding by guessing which encoding is actually being used by the web page. This can cause the web browser to treat certain sequences as special, opening up the client to subtle XSS attacks. See CWE-116 for more mitigations related to encoding/escaping.
+
+To help mitigate XSS attacks against the user&#x27;s session cookie, set the session cookie to be HttpOnly. In browsers that support the HttpOnly feature (such as more recent versions of Internet Explorer and Firefox), this attribute can prevent the user&#x27;s session cookie from being accessible to malicious client-side scripts that use document.cookie. This is not a complete solution, since HttpOnly is not supported by all browsers. More importantly, XMLHTTPRequest and other powerful browser technologies provide read access to HTTP headers, including the Set-Cookie header in which the HttpOnly flag is set.
+
+Assume all input is malicious. Use an &quot;accept known good&quot; input validation strategy, i.e., use an allow list of acceptable inputs that strictly conform to specifications. Reject any input that does not strictly conform to specifications, or transform it into something that does. Do not rely exclusively on looking for malicious or malformed inputs (i.e., do not rely on a deny list). However, deny lists can be useful for detecting potential attacks or determining which inputs are so malformed that they should be rejected outright.
+
+When performing input validation, consider all potentially relevant properties, including length, type of input, the full range of acceptable values, missing or extra inputs, syntax, consistency across related fields, and conformance to business rules. As an example of business rule logic, &quot;boat&quot; may be syntactically valid because it only contains alphanumeric characters, but it is not valid if you are expecting colors such as &quot;red&quot; or &quot;blue.&quot;
+
+Ensure that you perform input validation at well-defined interfaces within the application. This will help protect the application even if a component is reused or moved elsewhere.
+	</pre>
+                </div>
+                
+            </div>
+        </body>
+        </html>
+        

@@ -1,0 +1,102 @@
+
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Custom Security Report for http://testhtml5.vulnweb.com/#/popular</title>
+            <script src="https://cdn.tailwindcss.com"></script>
+            <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+            <style>
+                /* Dark/Pink Theme */
+                body { 
+                    font-family: 'Inter', sans-serif; 
+                    background-color: #1a1a2e; /* Dark background */
+                    color: #e0e0e0; /* Light text */
+                    line-height: 1.6; 
+                }
+                .container { 
+                    max-width: 960px; 
+                    margin: 2rem auto; 
+                    padding: 2rem; 
+                    background-color: #2a2a4a; /* Slightly lighter dark for container */
+                    border-radius: 0.75rem; 
+                    box-shadow: 0 8px 20px rgba(0,0,0,0.3); /* More pronounced shadow */
+                }
+                h1, h2, h3 { 
+                    color: #e94560; /* Pink accent for headings */
+                    margin-bottom: 1rem; 
+                }
+                h1 { 
+                    font-size: 2.5rem; 
+                    text-align: center; 
+                    color: #e94560; /* Pink accent */
+                }
+                h2 { 
+                    font-size: 1.8rem; 
+                    border-bottom: 2px solid #5a5a7a; /* Darker border */
+                    padding-bottom: 0.5rem; 
+                    margin-top: 2rem; 
+                }
+                h3 { 
+                    font-size: 1.4rem; 
+                    color: #e94560; /* Pink accent */
+                }
+                .alert-card { 
+                    background-color: #3a3a5a; /* Darker card background */
+                    border: 1px solid #5a5a7a; 
+                    border-radius: 0.5rem; 
+                    padding: 1.5rem; 
+                    margin-bottom: 1.5rem; 
+                }
+                .alert-card p { margin-bottom: 0.5rem; }
+                .alert-card strong { color: #ffffff; } /* White for strong text */
+                .summary-item { 
+                    display: flex; 
+                    justify-content: space-between; 
+                    padding: 0.5rem 0; 
+                    border-bottom: 1px dashed #5a5a7a; 
+                }
+                .summary-item:last-child { border-bottom: none; }
+                /* Risk colors - adjusted for dark background */
+                .risk-critical { color: #ff6b6b; font-weight: 700; } /* Brighter red */
+                .risk-high { color: #ff9f43; font-weight: 700; } /* Brighter orange */
+                .risk-medium { color: #ffe66d; font-weight: 700; } /* Brighter yellow */
+                .risk-low { color: #6be0ff; font-weight: 700; } /* Brighter blue/cyan */
+                .risk-informational { color: #98d8f0; font-weight: 600; } /* Lighter blue */
+                .risk-none { background-color: #28a745; color: #ffffff; padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-weight: 600; } /* Green for No Risk */
+                pre { 
+                    background-color: #2a2a4a; /* Darker pre background */
+                    padding: 1rem; 
+                    border-radius: 0.5rem; 
+                    overflow-x: auto; 
+                    font-size: 0.875rem; 
+                    color: #c0c0c0; /* Lighter grey for code */
+                }
+                a { color: #e94560; /* Pink links */ }
+                a:hover { text-decoration: underline; }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <h1>Custom Security Report for http://testhtml5.vulnweb.com/#/popular</h1>
+                <p class="text-center text-gray-400 mb-6">Generated on: 2025-07-13 22:39:25</p>
+
+                <h2>Summary of Vulnerabilities</h2>
+                <div class="bg-gray-800 p-6 rounded-lg shadow-inner mb-6">
+                    <div class="summary-item"><span>Critical:</span> <span class="risk-critical">0</span></div>
+                    <div class="summary-item"><span>High:</span> <span class="risk-high">0</span></div>
+                    <div class="summary-item"><span>Medium:</span> <span class="risk-medium">0</span></div>
+                    <div class="summary-item"><span>Low:</span> <span class="risk-low">0</span></div>
+                    <div class="summary-item"><span>Informational:</span> <span class="risk-informational">0</span></div>
+                    <div class="summary-item"><span>No Risk:</span> <span class="risk-none">0</span></div>
+                </div>
+
+                <h2>Detailed Alerts</h2>
+        
+                    <p class="text-gray-400">No vulnerabilities found for this target.</p>
+            
+            </div>
+        </body>
+        </html>
+        

@@ -1,0 +1,57 @@
+scanme.nmap.org
+
+
+
+Capabilities of Your Custom Device-Based Scanning
+
+Your custom device_scanner.py has the following capabilities:
+
+    Port Scanning (/api/device/port_scan):
+
+        What it does: It attempts to connect to specific TCP ports on a target IP address or hostname. If a connection is successful, it means the port is "open" (a service is listening on that port).
+
+        How it works: It uses Python's socket module to try and establish a connection to each specified port.
+
+    Which devices it can scan:
+
+        Any device reachable from your Kali VM's network. This includes:
+
+            Your own Kali VM (127.0.0.1 or its local IP).
+
+            Other computers, servers, routers, or IoT devices on your local home/office network (e.g., 192.168.1.X).
+
+            Public IP addresses or hostnames on the internet, provided your network's firewall allows outbound connections to those targets and their firewalls don't block your scan.
+
+    Input: You provide the target (IP or hostname) and the ports to scan (e.g., "80" for a single port, or "1-1024" for a range).
+
+Network Discovery (/api/device/network_discovery):
+
+    What it does: It tries to find active devices (hosts) on a specified local network segment.
+
+    How it works: It sends a basic ping command to every possible IP address in the X.X.X.1 to X.X.X.254 range (where X.X.X. is the network prefix you provide). If a device responds to the ping, it's considered an active host.
+
+    Which devices it can discover:
+
+        Active devices on your local network segment. For example, if your network is 192.168.1.0/24, it will try to find all devices with IPs like 192.168.1.1, 192.168.1.2, etc., that are currently online and respond to ping.
+
+        Input: You provide the network prefix (e.g., 192.168.1.).
+
+Important Notes and Limitations:
+
+    Custom vs. Professional Tools: Your custom code is a good start for understanding the basics. However, professional tools like Nmap are far more advanced. Your current script doesn't do things like:
+
+        UDP port scanning: It only scans TCP ports.
+
+        Service version detection: It won't tell you what service (e.g., Apache, Nginx) is running on an open port.
+
+        Operating System (OS) detection: It won't guess the OS of the target device.
+
+        Advanced firewall evasion techniques.
+
+        More sophisticated network discovery methods (e.g., ARP scanning for local networks).
+
+    Permissions: The ping command used for network discovery generally works on Kali Linux without special permissions, but on some systems, it might require root privileges.
+
+    Firewalls: Firewalls on the target device or between your Kali VM and the target can block scan attempts, making ports appear "closed" or "filtered" even if they are technically open.
+
+    Speed: Scanning a large range of ports or a full network segment can take time, especially with the default timeouts.

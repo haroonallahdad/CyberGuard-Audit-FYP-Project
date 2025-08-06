@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Dark Custom Report - {target}</title>
+    <style>
+        body { 
+            background: #231942; 
+            color: #f3e8ff; 
+            font-family: 'Inter', sans-serif; 
+        }
+        .container { 
+            max-width: 900px; 
+            margin: 40px auto; 
+            padding: 30px; 
+            background: #32235a; 
+            border-radius: 18px; 
+            box-shadow: 0 0 24px #0003; 
+        }
+        h1, h2, h3 { 
+            color: #a259ec; 
+            text-align: center; 
+            margin-bottom: 0.5em; 
+        }
+        .summary { 
+            background: #2d1950; 
+            border-radius: 12px; 
+            padding: 1.5em; 
+            margin-bottom: 2em; 
+        }
+        .summary-item { 
+            display: flex; 
+            justify-content: space-between; 
+            padding: 0.5em 0; 
+            border-bottom: 1px solid #3d2c5a; 
+        }
+        .risk-critical { color: #a259ec; }
+        .risk-high { color: #e94560; }
+        .risk-medium { color: #f7b731; }
+        .risk-low { color: #4dd599; }
+        .risk-informational { color: #5b8dee; }
+        .alert-card { 
+            background: #2d1950; 
+            border-radius: 10px; 
+            margin-bottom: 1.5em; 
+            padding: 1.2em; 
+            box-shadow: 0 2px 8px #0002; 
+        }
+        a { color: #5b8dee; }
+        pre { 
+            background: #231942; 
+            color: #f3e8ff; 
+            border-radius: 6px; 
+            padding: 0.7em; 
+            overflow-x: auto; 
+        }
+    </style>
+</head>
+<body>
+    <div class='container'>
+        <h1>Dark Custom Report</h1>
+        <p style='text-align:center;color:#e94560;'><strong>Generated On:</strong> {timestamp}</p>
+        <p style='text-align:center;'>This report provides a detailed analysis of vulnerabilities identified during the web application scan using OWASP ZAP.</p>
+        {content}
+    </div>
+</body>
+</html>

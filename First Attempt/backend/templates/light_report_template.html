@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Light Custom Report - {target}</title>
+    <style>
+        body { 
+            background: #f8fafc; 
+            color: #1e293b; 
+            font-family: 'Inter', sans-serif; 
+        }
+        .container { 
+            max-width: 900px; 
+            margin: 40px auto; 
+            padding: 30px; 
+            background: #ffffff; 
+            border-radius: 18px; 
+            box-shadow: 0 0 24px rgba(0, 0, 0, 0.1); 
+        }
+        h1, h2, h3 { 
+            color: #4f46e5; 
+            text-align: center; 
+            margin-bottom: 0.5em; 
+        }
+        .summary { 
+            background: #f1f5f9; 
+            border-radius: 12px; 
+            padding: 1.5em; 
+            margin-bottom: 2em; 
+        }
+        .summary-item { 
+            display: flex; 
+            justify-content: space-between; 
+            padding: 0.5em 0; 
+            border-bottom: 1px solid #e2e8f0; 
+        }
+        .risk-critical { color: #dc2626; }
+        .risk-high { color: #ef4444; }
+        .risk-medium { color: #f97316; }
+        .risk-low { color: #84cc16; }
+        .risk-informational { color: #3b82f6; }
+        .alert-card { 
+            background: #ffffff; 
+            border-radius: 10px; 
+            margin-bottom: 1.5em; 
+            padding: 1.2em; 
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); 
+            border: 1px solid #e2e8f0;
+        }
+        a { color: #4f46e5; }
+        pre { 
+            background: #f8fafc; 
+            color: #1e293b; 
+            border-radius: 6px; 
+            padding: 0.7em; 
+            overflow-x: auto; 
+            border: 1px solid #e2e8f0;
+        }
+    </style>
+</head>
+<body>
+    <div class='container'>
+        <h1>Light Custom Report</h1>
+        <p style='text-align:center;color:#ef4444;'><strong>Generated On:</strong> {timestamp}</p>
+        <p style='text-align:center;'>This report provides a comprehensive analysis of vulnerabilities identified during the web application scan using OWASP ZAP.</p>
+        {content}
+    </div>
+</body>
+</html>
