@@ -138,7 +138,7 @@ def perform_port_scan(target_host, port_range_str, port_timeout=1): # ADDED port
 
 def discover_network_hosts(network_prefix, overall_timeout=240): # Default to 4 minutes (240 seconds)
     """
-    Performs a basic network discovery by pinging hosts in a given range.
+    Performs network discovery with OS detection using nmap.
     Includes an overall timeout for the entire scanning process.
     """
     results = {
@@ -152,41 +152,82 @@ def discover_network_hosts(network_prefix, overall_timeout=240): # Default to 4 
         results["error"] = "Invalid network prefix format. Expected 'X.X.X.' (e.g., 192.168.1.)."
         return results
 
-    print(f"Starting network discovery for {network_prefix}1-254...", file=sys.stderr)
+    print(f"Starting network discovery with OS detection for {network_prefix}1-254...", file=sys.stderr)
 
-    individual_ping_wait_time = 0.2 # Small timeout for each individual ping
-    start_time = time.time() # Record the start time
+    try:
+        # Using nmap for OS detection. This requires nmap to be installed and often root privileges.
+        target_range = f"{network_prefix}1-254"
+        nmap_command = ['nmap', '-O', target_range, '-oX', '-']
 
-    for i in range(1, 255):
-        # Check if overall timeout has been reached
-        if time.time() - start_time > overall_timeout:
-            results["message"] = f"Network discovery stopped after {overall_timeout} seconds due to timeout."
-            print(f"Overall network discovery timeout reached after {overall_timeout} seconds.", file=sys.stderr)
-            break # Exit the loop
+        process = subprocess.run(
+            nmap_command,
+            capture_output=True,
+            text=True,
+            timeout=overall_timeout
+        )
 
-        ip = f"{network_prefix}{i}"
-        try:
-            ping_command = ['ping', '-c', '1', '-W', str(individual_ping_wait_time), ip]
-            
-            # The timeout here is for the individual subprocess call, not the overall script
-            process = subprocess.run(ping_command, capture_output=True, text=True, timeout=individual_ping_wait_time + 0.1)
-
-            if process.returncode == 0 and "bytes from" in process.stdout:
-                results["active_hosts"].append(ip)
-                print(f"Found active host: {ip}", file=sys.stderr)
+        if process.returncode != 0:
+            if "requires root privileges" in process.stderr.lower():
+                results["error"] = "Nmap OS detection requires root privileges. Please run the backend server with sudo."
+            elif "command not found" in process.stderr.lower():
+                results["error"] = "Nmap is not installed. Please install nmap to use OS detection."
             else:
-                pass # Suppress output for inactive hosts
-        except subprocess.TimeoutExpired:
-            pass # Individual ping timed out, which is fine
-        except Exception as e:
-            results["error"] = f"Error pinging {ip}: {str(e)}"
-            print(f"Error pinging {ip}: {str(e)}", file=sys.stderr)
-            # Continue to next IP even if one fails
+                results["error"] = f"Nmap scan failed. Stderr: {process.stderr}"
+            return results
 
-    if not results["active_hosts"] and not results["error"] and not results["message"]:
-        results["message"] = "No active hosts found in the specified range."
-    elif results["active_hosts"] and not results["message"]:
-        results["message"] = f"Found {len(results['active_hosts'])} active hosts."
+        # Parse the XML output
+        import xml.etree.ElementTree as ET
+        try:
+            root = ET.fromstring(process.stdout)
+        except ET.ParseError:
+            if not process.stdout.strip():
+                 results["error"] = f"Nmap produced no output, likely due to an error. Stderr: {process.stderr}"
+            else:
+                 results["error"] = f"Failed to parse Nmap XML output. Output may be incomplete or invalid."
+            return results
+
+        for host in root.findall('host'):
+            ip_address_element = host.find("address[@addrtype='ipv4']")
+            if ip_address_element is None:
+                continue
+            ip_address = ip_address_element.get('addr')
+            
+            status_element = host.find('status')
+            if status_element is None:
+                continue
+            status = status_element.get('state')
+
+            if status == 'up':
+                os_info = "Unknown"
+                os_element = host.find('os')
+                if os_element is not None:
+                    # Find the best OS match based on accuracy
+                    best_match = None
+                    highest_accuracy = -1
+                    for osclass in os_element.findall('osmatch'):
+                        accuracy = int(osclass.get('accuracy'))
+                        if accuracy > highest_accuracy:
+                            highest_accuracy = accuracy
+                            best_match = osclass.get('name')
+                    if best_match:
+                        os_info = best_match
+
+                results["active_hosts"].append({"ip": ip_address, "os": os_info})
+                print(f"Found active host: {ip_address}, OS: {os_info}", file=sys.stderr)
+
+        if not results["active_hosts"] and not results["error"]:
+            results["message"] = "No active hosts found in the specified range."
+        elif results["active_hosts"]:
+            results["message"] = f"Found {len(results['active_hosts'])} active hosts with OS information."
+
+    except subprocess.TimeoutExpired:
+        results["message"] = f"Network discovery timed out after {overall_timeout} seconds."
+        print(f"Network discovery timeout reached after {overall_timeout} seconds.", file=sys.stderr)
+    except FileNotFoundError:
+        results["error"] = "The 'nmap' command was not found. Please ensure 'nmap' is installed and in your system's PATH."
+    except Exception as e:
+        results["error"] = f"An unexpected error occurred during network discovery: {str(e)}"
+        print(f"An unexpected error occurred: {str(e)}", file=sys.stderr)
 
     return results
 

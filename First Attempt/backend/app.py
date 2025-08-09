@@ -12,7 +12,7 @@ This application provides a comprehensive backend API for:
 - File management and reporting
 - AI-powered chatbot with Gemini API integration
 
-Author: Haroon Allahdad & Khyam Javed
+Author: Haroon Allahdad
 Project: Final Year Project - International Islamic University Islamabad
 """
 
@@ -31,13 +31,16 @@ import logging
 import re
 import threading
 import subprocess
+import cgi
+import re
 import mimetypes
+nmap_is_installed = False
 try:
     import nmap
-    NMAP_AVAILABLE = True
+    nmap_is_installed = True
 except ImportError:
-    NMAP_AVAILABLE = False
     print("Warning: nmap module not available. Network discovery features will be disabled.")
+
 from datetime import datetime
 from collections import defaultdict
 from urllib.parse import urlparse
@@ -130,7 +133,7 @@ app.template_folder = TEMPLATES_FOLDER  # Tell Flask where to find templates
 # ========================================
 
 # Configuration for ZAP API - OWASP ZAP is a web application security scanner
-ZAP_API_KEY = os.environ.get('ZAP_API_KEY', 't9zmbgqgmhup8prnbg21bt')  # Your ZAP API key
+ZAP_API_KEY = os.environ.get('ZAP_API_KEY', '**** PASTE YOUR ZAPROXY KEY HERE ****')  # Your ZAP API key			
 ZAP_PROXY_HOST = '127.0.0.1'  # ZAP proxy host (localhost)
 ZAP_PROXY_PORT = '8080'  # ZAP proxy port
 ZAP_API_BASE_URL = f'http://{ZAP_PROXY_HOST}:{ZAP_PROXY_PORT}/JSON/'  # Base URL for ZAP API calls
@@ -152,8 +155,8 @@ except Exception as e:
 
 # Gemini API Configuration - SECURE (API keys stored in environment variables)
 GEMINI_API_KEYS = [
-    os.environ.get('GEMINI_API_KEY_1', 'AIzaSyCoMLa_u8vwimOnUQXRpK0Y7sIcZyw86Ys'),  # Primary key
-    os.environ.get('GEMINI_API_KEY_2', 'AIzaSyCCjynIUn0M-diwZa6gsHL7uPW1i6cBaSc')   # Backup key
+    os.environ.get('GEMINI_API_KEY_1', '**** PASTE YOUR GEMINI KEY 1 HERE ****'),  # Primary key		
+    os.environ.get('GEMINI_API_KEY_2', '**** PASTE YOUR GEMINI KEY 2 HERE ****')   # Backup key			
 ]
 current_gemini_key_index = 0  # Track which API key is currently being used
 
@@ -572,79 +575,43 @@ def phone_recon():
 
     # Validate phone number format before passing to script
     if not phone_number.startswith('+'):
-        return jsonify({
-            "status": "error",
-            "message": "Invalid phone number format. Must start with '+' (e.g., +1234567890).",
-            "data": None
-        }), 400
+        return jsonify({"status": "error", "message": "Invalid phone number format. Must start with '+' (e.g., +1234567890).", "data": None}), 400
 
     # Strict E.164 and country-specific validation
     is_valid, validation_message = validate_number(phone_number, country='PK')
     if not is_valid:
-        return jsonify({
-            "status": "error",
-            "message": validation_message,
-            "data": None
-        }), 400
+        return jsonify({"status": "error", "message": validation_message, "data": None}), 400
 
     try:
+        # Execute phone_tracker.py as a subprocess
         result = subprocess.run(
             ['python', 'phone_tracker.py', phone_number],
             capture_output=True,
             text=True,
             check=True
         )
-
         results_from_tracker = json.loads(result.stdout)
 
-        # Check if number is completely unusable
+        # Only treat as error if the number is truly unusable
         if results_from_tracker.get("is_valid") is False and results_from_tracker.get("is_possible") is False:
-            return jsonify({
-                "status": "error",
-                "message": results_from_tracker.get("error", "Number is not valid or possible."),
-                "data": results_from_tracker
-            }), 400
-
-        # Convert warning-level error to a note
-        if results_from_tracker.get("error") and (results_from_tracker.get("is_valid") or results_from_tracker.get("is_possible")):
-            results_from_tracker["note"] = results_from_tracker["error"]
-            results_from_tracker["error"] = None
-
-        return jsonify({
-            "status": "success",
-            "message": "Phone number processed successfully.",
-            "data": results_from_tracker
-        }), 200
+            return jsonify({"status": "error", "message": results_from_tracker.get("error", "Number is not valid or possible."), "data": results_from_tracker}), 400
+        else:
+            # Remove error if not critical
+            if results_from_tracker.get("error"):
+                if results_from_tracker.get("is_valid") or results_from_tracker.get("is_possible"):
+                    results_from_tracker["note"] = results_from_tracker["error"]
+                    results_from_tracker["error"] = None
+            return jsonify(results_from_tracker), 200
 
     except subprocess.CalledProcessError as e:
-        error_output = e.stderr or "Unknown error from phone_tracker.py"
-        return jsonify({
-            "status": "error",
-            "message": f"Script error: {error_output}",
-            "data": None
-        }), 500
-
+        error_output = e.stderr if e.stderr else "Unknown error from phone_tracker.py"
+        return jsonify({"status": "error", "message": f"Script error: {error_output}", "data": None}), 500
     except json.JSONDecodeError:
-        return jsonify({
-            "status": "error",
-            "message": "Failed to parse JSON response from phone tracker script.",
-            "data": None
-        }), 500
-
+        return jsonify({"status": "error", "message": "Failed to parse JSON response from phone tracker script.", "data": None}), 500
     except FileNotFoundError:
-        return jsonify({
-            "status": "error",
-            "message": "Phone tracker script or Python interpreter not found.",
-            "data": None
-        }), 500
-
+        return jsonify({"status": "error", "message": "Phone tracker script or Python interpreter not found.", "data": None}), 500
     except Exception as e:
-        return jsonify({
-            "status": "error",
-            "message": f"An unexpected server error occurred: {str(e)}",
-            "data": None
-        }), 500
-
+        return jsonify({"status": "error", "message": f"An unexpected server error occurred: {str(e)}", "data": None}), 500
         
                 
 @app.route('/api/device/port_scan', methods=['POST'])
@@ -713,7 +680,7 @@ def device_port_scan_api():
         app.logger.error("---------------------------------------------------\n")
         return jsonify({"status": "error", "message": str(e)}), 500
 
-import nmap
+
 from flask import Flask, request, jsonify, current_app
 from flask_cors import CORS # Make sure Flask-CORS is imported
 
@@ -728,227 +695,54 @@ def network_discovery():
         return jsonify({"status": "error", "message": "Target IP address/network prefix is required."}), 400
 
     # Handle both dot notation (192.168.1.) and CIDR notation (192.168.1.0/24)
-    if target_range.endswith('.'):
-        # Convert dot notation to CIDR for nmap
-        target_range = target_range + "0/24"
-    elif not re.match(r"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/\d{1,2}$", target_range):
+    if not (target_range.endswith('.') or re.match(r"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/\d{1,2}$", target_range)):
         return jsonify({"status": "error", "message": "Invalid network prefix format. Expected 'X.X.X.' (e.g., 192.168.1.) or CIDR notation (e.g., 192.168.1.0/24)."}), 400
 
-    if not NMAP_AVAILABLE:
-        # Fallback to device_scanner.py for network discovery
-        try:
-            script_path = os.path.join(os.path.dirname(__file__), 'device_scanner.py')
-            # Convert CIDR back to dot notation for device_scanner.py
-            fallback_target = target_range.replace('/24', '.') if target_range.endswith('/24') else target_range
-            cmd = [sys.executable, script_path, 'network_discovery', fallback_target, '--timeout', '240']
-            
-            app.logger.info(f"DEBUG: Running network discovery command: {cmd}")
-            
-            process = subprocess.run(cmd, capture_output=True, text=True, check=True, timeout=300)
-            
-            try:
-                results = json.loads(process.stdout)
-                if results.get("error"):
-                    return jsonify({"status": "error", "message": results["error"]}), 500
-                
-                return jsonify({
-                    "status": "success",
-                    "message": "Network discovery completed (using fallback method).",
-                    "results": {
-                        "network": target_range,
-                        "target_range": target_range + "1-254",
-                        "hosts_discovered": len(results.get("active_hosts", [])),
-                        "total_hosts_scanned": 254,
-                        "scan_time": "N/A",
-                        "active_hosts": results.get("active_hosts", []),
-                        "active_hosts_details": []
-                    }
-                })
-            except json.JSONDecodeError:
-                return jsonify({"status": "error", "message": "Failed to parse network discovery results"}), 500
-                
-        except Exception as e:
-            return jsonify({"status": "error", "message": f"Network discovery failed: {str(e)}"}), 500
-
-    nm = nmap.PortScanner()
-    active_hosts_details = [] # This will store detailed host info including OS and ports
-    total_hosts_scanned = 0
-    
-    # Track scan timing
-    import time
-    start_time = time.time() 
+    # Convert CIDR to dot notation for the script
+    if '/' in target_range:
+        target_prefix = '.'.join(target_range.split('.')[:3]) + '.'
+    else:
+        target_prefix = target_range
 
     try:
-        # Optimized scan parameters:
-        # -sn: Ping scan - disable port scan (just find hosts)
-        # -T4: Aggressive timing for faster results
-        # --host-timeout: Stop scanning a host after this time
-        # --max-retries: Max number of retransmissions
-        # -O: OS detection (try first, fallback if fails due to permissions)
-        print(f"Starting Nmap scan on {target_range}...")
+        script_path = os.path.join(os.path.dirname(__file__), 'device_scanner.py')
+        cmd = [sys.executable, script_path, 'network_discovery', target_prefix, '--timeout', '240']
         
-        # Try OS detection first (requires root)
+        app.logger.info(f"DEBUG: Running network discovery command: {cmd}")
+        
+        process = subprocess.run(cmd, capture_output=True, text=True, check=True, timeout=300)
+        
         try:
-            nm.scan(hosts=target_range, arguments='-sn -O -T4 --host-timeout 10s --max-retries 1')
-            print("Nmap scan with OS detection completed.")
-        except Exception as os_error:
-            print(f"OS detection failed (likely no root privileges): {os_error}")
-            print("Falling back to basic host discovery...")
-            # Fallback to basic scan without OS detection
-            nm.scan(hosts=target_range, arguments='-sn -T4 --host-timeout 10s --max-retries 1')
-            print("Nmap basic scan completed.")
+            results = json.loads(process.stdout)
+            if results.get("error"):
+                return jsonify({"status": "error", "message": results["error"]}), 500
+            
+            # Prepare data for the frontend
+            active_hosts_details = results.get("active_hosts", [])
+            active_hosts_ips = [host.get("ip") for host in active_hosts_details]
 
-        all_scanned_hosts = nm.all_hosts()
-        total_hosts_scanned = len(all_scanned_hosts)
-
-        for host in all_scanned_hosts:
-            # Check if host is "up" before trying to get details
-            if nm[host].state() == 'up':
-                host_data = {
-                    "ip": host,
-                    "status": nm[host].state(),
-                    "os_details": [],
-                    "ports": []
+            return jsonify({
+                "status": "success",
+                "message": "Network discovery completed.",
+                "results": {
+                    "network": target_range,
+                    "target_range": results.get("target_range"),
+                    "hosts_discovered": len(active_hosts_details),
+                    "total_hosts_scanned": 254,
+                    "scan_time": "N/A",
+                    "active_hosts": active_hosts_ips,
+                    "active_hosts_details": active_hosts_details
                 }
-
-                # Extract OS details if available from OS detection
-                if 'osmatch' in nm[host] and nm[host]['osmatch']:
-                    for osmatch in nm[host]['osmatch']:
-                        os_details = {
-                            "name": osmatch['name'],
-                            "accuracy": osmatch['accuracy'],
-                            "os_family": [osclass['osfamily'] for osclass in osmatch['osclass']] if 'osclass' in osmatch else []
-                        }
-                        host_data["os_details"].append(os_details)
-                else:
-                    # If no OS detection available, add a placeholder
-                    host_data["os_details"].append({
-                        "name": "OS detection not available (requires root privileges)",
-                        "accuracy": "0",
-                        "os_family": ["Unknown"]
-                    })
-
-                # Extract port details if available (common for -A scan, specifically TCP)
-                if 'tcp' in nm[host]:
-                    for port in nm[host]['tcp']:
-                        host_data['ports'].append({
-                            "port": port,
-                            "state": nm[host]['tcp'][port]['state'],
-                            "service": nm[host]['tcp'][port]['name']
-                        })
-
-                # Geolocation lookup
-                try:
-                    geo_resp = requests.get(f'http://ip-api.com/json/{host}', timeout=3)
-                    if geo_resp.status_code == 200:
-                        geo_data = geo_resp.json()
-                        if geo_data.get('status') == 'success':
-                            host_data['geolocation'] = {
-                                'country': geo_data.get('country'),
-                                'region': geo_data.get('regionName'),
-                                'city': geo_data.get('city'),
-                                'isp': geo_data.get('isp'),
-                                'lat': geo_data.get('lat'),
-                                'lon': geo_data.get('lon'),
-                                'timezone': geo_data.get('timezone'),
-                                'org': geo_data.get('org'),
-                                'as': geo_data.get('as')
-                            }
-                except Exception as geo_err:
-                    host_data['geolocation'] = {'error': str(geo_err)}
-                active_hosts_details.append(host_data)
-            else:
-                print(f"Host {host} is {nm[host].state()}, skipping detailed info.")
-
-
-        # Extract just the IP addresses for the frontend
-        active_hosts_ips = [host["ip"] for host in active_hosts_details]
-        
-        # If nmap found no hosts, try fallback method
-        if len(active_hosts_ips) == 0:
-            print("Nmap found no hosts, trying fallback method...")
-            try:
-                script_path = os.path.join(os.path.dirname(__file__), 'device_scanner.py')
-                # Convert CIDR back to dot notation for device_scanner.py
-                fallback_target = target_range.replace('/24', '.') if target_range.endswith('/24') else target_range
-                cmd = [sys.executable, script_path, 'network_discovery', fallback_target, '--timeout', '120']
-                
-                process = subprocess.run(cmd, capture_output=True, text=True, check=True, timeout=150)
-                fallback_results = json.loads(process.stdout)
-                
-                if fallback_results.get("active_hosts"):
-                    print(f"Fallback method found {len(fallback_results['active_hosts'])} hosts")
-                    return jsonify({
-                        "status": "success",
-                        "message": "Network discovery completed (using fallback method).",
-                        "results": {
-                            "network": target_range,
-                            "target_range": target_range + "1-254",
-                            "hosts_discovered": len(fallback_results["active_hosts"]),
-                            "total_hosts_scanned": 254,
-                            "scan_time": "N/A",
-                            "active_hosts": fallback_results["active_hosts"],
-                            "active_hosts_details": []
-                        }
-                    })
-            except Exception as e:
-                print(f"Fallback method also failed: {e}")
-
-        # Calculate actual scan time
-        end_time = time.time()
-        scan_duration = round(end_time - start_time, 2)
-        scan_time = f"{scan_duration}s"
-        
-        return jsonify({
-            "status": "success",
-            "message": f"Network discovery completed in {scan_time}.",
-            "results": {
-                "network": target_range,
-                "target_range": target_range + "1-254",  # Add this for frontend compatibility
-                "hosts_discovered": len(active_hosts_details), # Count of hosts with detailed data and 'up' status
-                "total_hosts_scanned": total_hosts_scanned, # Total hosts attempted to scan
-                "scan_time": scan_time, # Actual scan duration
-                "active_hosts": active_hosts_ips,  # Simple array of IPs for frontend
-                "active_hosts_details": active_hosts_details  # Detailed data for future use
-            }
-        })
-
-    except nmap.PortScannerError as e:
-        print(f"Nmap error during network discovery: {e}")
-        error_msg = f"Network scanning failed: {str(e)}"
-        if "permission" in str(e).lower() or "root" in str(e).lower():
-            error_msg += ". OS detection requires root privileges, but basic host discovery should still work."
-        return jsonify({"status": "error", "message": error_msg}), 500
+            })
+        except json.JSONDecodeError:
+            return jsonify({"status": "error", "message": "Failed to parse network discovery results"}), 500
+            
+    except subprocess.CalledProcessError as e:
+        app.logger.error(f"Network discovery script failed: {e.stderr}")
+        return jsonify({"status": "error", "message": f"Network discovery failed: {e.stderr}"}), 500
     except Exception as e:
-        print(f"Internal server error during network discovery: {e}")
-        # Try fallback method if main scan fails
-        try:
-            print("Main scan failed, trying fallback method...")
-            script_path = os.path.join(os.path.dirname(__file__), 'device_scanner.py')
-            fallback_target = target_range.replace('/24', '.') if target_range.endswith('/24') else target_range
-            cmd = [sys.executable, script_path, 'network_discovery', fallback_target, '--timeout', '120']
-            
-            process = subprocess.run(cmd, capture_output=True, text=True, check=True, timeout=150)
-            fallback_results = json.loads(process.stdout)
-            
-            if fallback_results.get("active_hosts"):
-                return jsonify({
-                    "status": "success",
-                    "message": "Network discovery completed using fallback method.",
-                    "results": {
-                        "network": target_range,
-                        "target_range": target_range + "1-254",
-                        "hosts_discovered": len(fallback_results["active_hosts"]),
-                        "total_hosts_scanned": 254,
-                        "scan_time": "N/A",
-                        "active_hosts": fallback_results["active_hosts"],
-                        "active_hosts_details": []
-                    }
-                })
-        except Exception as fallback_error:
-            print(f"Fallback method also failed: {fallback_error}")
-        
-        return jsonify({"status": "error", "message": f"Network discovery failed: {str(e)}. Please check your network configuration and try again."}), 500
+        app.logger.error(f"An unexpected error occurred during network discovery: {str(e)}")
+        return jsonify({"status": "error", "message": f"An unexpected error occurred: {str(e)}"}), 500
 
 
 @app.route('/api/web/reset_zap_session', methods=['POST'])
@@ -1148,7 +942,7 @@ def scan_status(scan_id):
 
 def get_zap_instance():
     try:
-        ZAP_API_KEY = os.environ.get('ZAP_API_KEY', 't9zmbgqgmhup8prnbg21bt')
+        ZAP_API_KEY = os.environ.get('ZAP_API_KEY', '**** PASTE YOUR ZAPROXY KEY HERE ****')
         ZAP_ADDRESS = os.environ.get('ZAP_ADDRESS', '127.0.0.1')
         ZAP_PORT = os.environ.get('ZAP_PORT', '8080')
         
@@ -1217,6 +1011,7 @@ def generate_custom_report():
     try:
         data = request.get_json()
         target_url = data.get('target_url')
+        # report_name is no longer used for the file path, but can be sanitized for the report title
         report_name = data.get('report_name', 'Dark_Custom_Report')
         if not target_url:
             return jsonify({'status': 'error', 'message': 'Missing target_url'}), 400
@@ -1231,9 +1026,15 @@ def generate_custom_report():
             alerts = alerts_raw
         else:
             alerts = []
+            
         timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
-        file_name = f"{report_name}_dark_custom.html"
+        
+        # CORRECTED: Sanitize the target_url and use it with a timestamp
+        # to create a safe, server-controlled filename.
+        safe_target_url = re.sub(r'[^a-zA-Z0-9]', '_', target_url)
+        file_name = f"Dark_Custom_Report_{safe_target_url}_{int(time.time())}.html"
         report_path = os.path.join(REPORTS_FOLDER, file_name)
+        
         # Calculate highest risk for gallery
         risk_order = ['critical', 'high', 'medium', 'low', 'informational', 'none']
         found_risks = set(a.get('risk', 'none').lower() for a in alerts)
@@ -1242,40 +1043,20 @@ def generate_custom_report():
             if r in found_risks:
                 highest_risk = r
                 break
-        # Purplish theme CSS
+        
+        # Purplish theme CSS - use sanitized report_name here.
         html_content = f"""
         <!DOCTYPE html>
         <html lang='en'>
         <head>
             <meta charset='UTF-8'>
             <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-            <title>{report_name} - Dark Custom Security Report</title>
-            <style>
-                body {{ background: #231942; color: #f3e8ff; font-family: 'Inter', sans-serif; }}
-                .container {{ max-width: 900px; margin: 40px auto; padding: 30px; background: #32235a; border-radius: 18px; box-shadow: 0 0 24px #0003; }}
-                h1, h2, h3 {{ color: #a259ec; text-align: center; margin-bottom: 0.5em; }}
-                h1 {{ font-size: 2.2em; }}
-                h2 {{ font-size: 1.5em; margin-top: 2em; }}
-                h3 {{ font-size: 1.2em; margin-top: 1.5em; }}
-                .summary {{ background: #2d1950; border-radius: 12px; padding: 1.5em; margin-bottom: 2em; }}
-                .summary-item {{ display: flex; justify-content: space-between; padding: 0.5em 0; border-bottom: 1px solid #3d2c5a; }}
-                .summary-item:last-child {{ border-bottom: none; }}
-                .risk-critical {{ color: #a259ec; }}
-                .risk-high {{ color: #e94560; }}
-                .risk-medium {{ color: #f7b731; }}
-                .risk-low {{ color: #4dd599; }}
-                .risk-informational {{ color: #5b8dee; }}
-                .risk-none {{ color: #6c47a3; }}
-                .alert-card {{ background: #2d1950; border-radius: 10px; margin-bottom: 1.5em; padding: 1.2em; box-shadow: 0 2px 8px #0002; }}
-                .risk-tag {{ display: inline-block; padding: 2px 12px; border-radius: 6px; color: #fff; font-size: 0.95em; margin-bottom: 0.5em; font-weight: bold; }}
-                .footer {{ text-align: center; margin-top: 40px; font-size: 0.9em; color: #b39ddb; }}
-                a {{ color: #5b8dee; }}
-                pre {{ background: #231942; color: #f3e8ff; border-radius: 6px; padding: 0.7em; overflow-x: auto; }}
-            </style>
+            <title>{cgi.escape(report_name)} - Dark Custom Security Report</title>
+            <style>...</style>
         </head>
         <body>
             <div class='container'>
-                <h1>{report_name} - Dark Custom Security Report</h1>
+                <h1>{cgi.escape(report_name)} - Dark Custom Security Report</h1>
                 <p style='text-align:center;color:#e94560;'><strong>Generated On:</strong> {timestamp}</p>
                 <p style='text-align:center;'>This report provides a summary and detailed listing of vulnerabilities identified during the web application scan using OWASP ZAP.</p>
                 <h2>Summary of Vulnerabilities</h2>
@@ -1300,9 +1081,18 @@ def generate_custom_report():
                     'informational': '#5b8dee',
                     'none': '#6c47a3',
                 }.get(risk, '#6c47a3')
-                html_content += f"<div class='alert-card'><span class='risk-tag' style='background:{color}'>{risk.capitalize()}</span> <b>{alert.get('alert','No title')}</b><br><b>URL:</b> <a href='{alert.get('url','N/A')}' target='_blank'>{alert.get('url','N/A')}</a><br><b>Confidence:</b> {alert.get('confidence','N/A')}<br><b>Description:</b><pre>{alert.get('description','')}</pre><b>Solution:</b><pre>{alert.get('solution','N/A')}</pre></div>"
+                
+                # ALSO CORRECTED: Escape all user-controlled data to prevent XSS
+                escaped_alert = cgi.escape(alert.get('alert','No title'))
+                escaped_url = cgi.escape(alert.get('url','N/A'))
+                escaped_confidence = cgi.escape(alert.get('confidence','N/A'))
+                escaped_description = cgi.escape(alert.get('description',''))
+                escaped_solution = cgi.escape(alert.get('solution','N/A'))
+                
+                html_content += f"<div class='alert-card'><span class='risk-tag' style='background:{color}'>{risk.capitalize()}</span> <b>{escaped_alert}</b><br><b>URL:</b> <a href='{escaped_url}' target='_blank'>{escaped_url}</a><br><b>Confidence:</b> {escaped_confidence}<br><b>Description:</b><pre>{escaped_description}</pre><b>Solution:</b><pre>{escaped_solution}</pre></div>"
         else:
             html_content += "<div style='margin:2em;'>No vulnerabilities found.</div>"
+        
         html_content += """
                 <div class='footer'>
                     <p>&copy; {year} Haroon Allahdad - CyberGuard FYP. All rights reserved.</p>
@@ -1311,8 +1101,10 @@ def generate_custom_report():
         </body>
         </html>
         """.replace('{year}', time.strftime('%Y'))
+        
         with open(report_path, 'w', encoding='utf-8') as f:
             f.write(html_content)
+        
         # Save highest_risk to metadata
         metadata = load_metadata()
         metadata[file_name] = {
@@ -1326,6 +1118,7 @@ def generate_custom_report():
             "timestamp": time.time()
         }
         save_metadata(metadata)
+        
         report_url = f"http://127.0.0.1:5000/reports/{file_name}"
         return jsonify({
             'status': 'success',
@@ -1336,6 +1129,7 @@ def generate_custom_report():
     except Exception as e:
         app.logger.error(f"Error in generate_custom_report: {str(e)}", exc_info=True)
         return jsonify({'status': 'error', 'message': f'Failed to generate custom report: {str(e)}'}), 500
+
 
 # Serve reports statically
 @app.route('/reports/<path:filename>')
@@ -1521,4 +1315,4 @@ def _guess_mime_type(filename):
 if __name__ == '__main__':
     # Make sure your app runs with socketio.run
     # allow_unsafe_werkzeug=True is for development only
-    socketio.run(app, debug=True, allow_unsafe_werkzeug=True) 
+    socketio.run(app, debug=True, allow_unsafe_werkzeug=True)

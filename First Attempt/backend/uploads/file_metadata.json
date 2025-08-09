@@ -270,14 +270,14 @@
     "timestamp": 1753537101.4686491
   },
   "Dark_Custom_Report_dark_custom.html": {
-    "title": "ZAP Native Report: http://testphp.vulnweb.com/",
-    "description": "ZAP Native Report for http://testphp.vulnweb.com/. Highest detected risk: High.",
+    "title": "ZAP Native Report: https://www.iiu.edu.pk/",
+    "description": "ZAP Native Report for https://www.iiu.edu.pk/. Highest detected risk: Medium.",
     "fileName": "Dark_Custom_Report_dark_custom.html",
     "fileType": "text/html",
     "fileUrl": "http://127.0.0.1:5000/reports/Dark_Custom_Report_dark_custom.html",
     "source": "zap_report",
-    "highest_risk": "high",
-    "timestamp": 1754378243.361108
+    "highest_risk": "medium",
+    "timestamp": 1754655271.7358544
   },
   "Light_Custom_Report_http___rest_vulnweb_com__1753612966.html": {
     "title": "Light Custom Security Report: http://rest.vulnweb.com/",
@@ -298,5 +298,39 @@
     "source": "zap_report",
     "highest_risk": "medium",
     "timestamp": 1753783404.1276946
+  },
+  "kali-purple.png": {
+    "title": "Testing jpg",
+    "description": "This is an image uploading test."
+  },
+  "Light_Custom_Report_http___testphp_vulnweb_com__1754742321.html": {
+    "title": "Light Custom Security Report: http://testphp.vulnweb.com/",
+    "description": "Light Custom Security Report for http://testphp.vulnweb.com/. Highest detected risk: High.",
+    "fileName": "Light_Custom_Report_http___testphp_vulnweb_com__1754742321.html",
+    "fileType": "text/html",
+    "fileUrl": "http://127.0.0.1:5000/reports/Light_Custom_Report_http___testphp_vulnweb_com__1754742321.html",
+    "source": "zap_report",
+    "highest_risk": "high",
+    "timestamp": 1754742321.7745435
+  },
+  "Light_Custom_Report_http___rest_vulnweb_com__1754742495.html": {
+    "title": "Light Custom Security Report: http://rest.vulnweb.com/",
+    "description": "Light Custom Security Report for http://rest.vulnweb.com/. Highest detected risk: Medium.",
+    "fileName": "Light_Custom_Report_http___rest_vulnweb_com__1754742495.html",
+    "fileType": "text/html",
+    "fileUrl": "http://127.0.0.1:5000/reports/Light_Custom_Report_http___rest_vulnweb_com__1754742495.html",
+    "source": "zap_report",
+    "highest_risk": "medium",
+    "timestamp": 1754742495.6690662
+  },
+  "Light_Custom_Report_http___rest_vulnweb_com__1754746142.html": {
+    "title": "Light Custom Security Report: http://rest.vulnweb.com/",
+    "description": "Light Custom Security Report for http://rest.vulnweb.com/. Highest detected risk: Medium.",
+    "fileName": "Light_Custom_Report_http___rest_vulnweb_com__1754746142.html",
+    "fileType": "text/html",
+    "fileUrl": "http://127.0.0.1:5000/reports/Light_Custom_Report_http___rest_vulnweb_com__1754746142.html",
+    "source": "zap_report",
+    "highest_risk": "medium",
+    "timestamp": 1754746142.8629885
   }
 }

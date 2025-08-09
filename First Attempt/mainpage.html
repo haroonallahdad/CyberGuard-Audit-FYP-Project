@@ -46,7 +46,7 @@
         - Phase 3: Exploitation (Vulnerability assessment and testing)
         - Phase 4: Reporting (Comprehensive security reports)
         
-        Authors: Haroon Allahdad & Khyam Javed
+        Authors: Haroon Allahdad
         Institution: International Islamic University Islamabad
         Project: Final Year Project - CyberGuard: Automated Penetration Testing Platform
         ========================================
@@ -59,7 +59,7 @@
     <!-- SEO Meta Tags -->
     <meta name="description" content="Comprehensive automated penetration testing platform for web applications, network devices, and OSINT gathering. Professional security assessment tools.">
     <meta name="keywords" content="penetration testing, cybersecurity, web security, vulnerability assessment, OSINT, network scanning, security tools">
-    <meta name="author" content="Haroon Allahdad & Khyam Javed">
+    <meta name="author" content="Haroon Allahdad">
     <meta name="robots" content="index, follow">
     
     <!-- Open Graph Meta Tags -->
@@ -1491,11 +1491,11 @@
 
                 <div class="mb-6">
                     <label for="osint-query" class="block text-gray-700 text-sm font-bold mb-2">Target Identifier (Username or +Phone):</label>
-                    <input type="text" id="osint-query" class="input-field" placeholder="e.g., khyamjaved or +923221224382">
+                    <input type="text" id="osint-query" class="input-field" placeholder="e.g., haroonallahdad or +923221224382">
                 </div>
 
                 <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mb-6">
-                    <button id="osint-search-btn" class="btn flex-1 px-8 py-4" onclick="performOSINTSearch()">Perform OSINT Search</button>
+                    <button id="osint-search-btn" class="btn flex-1 px-8 py-4">Perform OSINT Search</button>
                     <button id="contact-info-btn" class="btn btn-secondary flex-1 px-8 py-4" onclick="performPhoneTrack()">Retrieve Contact Information</button>
                 </div>
 
@@ -1663,7 +1663,7 @@
                     <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
                         <h4 class="font-semibold text-yellow-800 mb-2">⚠️ Copyright Notice</h4>
                         <p class="text-sm text-yellow-700">
-                            <strong>© 2025 Haroon Allahdad & Khyam Javed.</strong> All rights reserved. This platform, 
+                            <strong>© 2025 Haroon Allahdad</strong> All rights reserved. This platform, 
                             including its design, functionality, and underlying concepts, is protected by copyright law. 
                             Unauthorized reproduction, distribution, or commercial use is strictly prohibited.
                         </p>
@@ -2102,9 +2102,9 @@
                 </div>
             </div>
             
-            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
-                <p class="text-gray-300">&copy; 2025 Haroon Allahdad & Khyam Javed. All rights reserved. | <a href="#" class="text-gray-300 hover:text-white transition-colors nav-link" data-page="privacy-policy">Privacy Policy</a> | <a href="#" class="text-gray-300 hover:text-white transition-colors nav-link" data-page="terms-of-service">Terms of Service</a></p>
-            </div>
+            <div id="main-footer" class="border-t border-gray-700 mt-8 pt-8 text-center">
+            <p class="text-gray-300">&copy; 2025 <b>Haroon Allahdad</b>. All rights reserved. | <a href="#" class="text-gray-300 hover:text-white transition-colors nav-link" data-page="privacy-policy">Privacy Policy</a> | <a href="#" class="text-gray-300 hover:text-white transition-colors nav-link" data-page="terms-of-service">Terms of Service</a></p>
+        </div>
         </div>
     </footer>
 
@@ -2455,7 +2455,7 @@
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ phone_number: target })
+            body: JSON.stringify({ target: target })
         });
 
             let data;
@@ -2467,7 +2467,7 @@
                 const rawText = await response.text();
                 console.error('DEBUG: Raw response text:', rawText);
                 if (typeof showToast === 'function') {
-                    showToast("Server returned an invalid response format.", 'error', 5000);
+                    showToast("The server returned an invalid response, this might be due to an incorrect phone number format.", 'error', 5000);
                 }
                 reconResults.innerHTML = `<p class="text-red-600 font-semibold p-4 bg-red-50 rounded-lg">Error: The server returned an unexpected response. Please check the browser console for details.</p>`;
                 return;
@@ -2481,7 +2481,7 @@
                 if (data && data.error) {
                     userDisplayMessage = data.error; // Use the error message from the backend if available
                 } else if (data && data.is_valid === false && data.is_possible === false) {
-                    userDisplayMessage = "The provided phone number is not valid and could not be analyzed.";
+                    userDisplayMessage = "The provided phone number is not valid and could not be analyzed. Please check the number and country code.";
                 } else if (!response.ok) {
                     userDisplayMessage = `The server returned an error: ${response.status} ${response.statusText}`;
                 }
@@ -3599,6 +3599,62 @@ function getChatbotInstructions(pageId) {
         });
     }
 
+
+    (function(){
+    const correctName = "Haroon Allahdad";
+    const correctFooterHTML = `
+        <div id="main-footer" class="border-t border-gray-700 mt-8 pt-8 text-center">
+            <p class="text-gray-300">&copy; 2025 <strong>${correctName}</strong>. All rights reserved. |
+            <a href="#" class="text-gray-300 hover:text-white transition-colors nav-link" data-page="privacy-policy">Privacy Policy</a> |
+            <a href="#" class="text-gray-300 hover:text-white transition-colors nav-link" data-page="terms-of-service">Terms of Service</a>
+            </p>
+        </div>
+    `;
+
+    let isChanging = false;
+
+    function restoreFooter() {
+        if (isChanging) return;
+        isChanging = true;
+        const footer = document.getElementById('main-footer');
+        if (footer) {
+            footer.outerHTML = correctFooterHTML;
+        } else {
+            document.body.insertAdjacentHTML('beforeend', correctFooterHTML);
+        }
+        isChanging = false;
+    }
+
+    function validateFooterContent() {
+        const footer = document.getElementById('main-footer');
+        if (!footer || !footer.textContent.includes(correctName)) {
+            restoreFooter();
+        }
+    }
+
+    window.addEventListener('load', () => {
+        restoreFooter(); // Ensure footer is correct at start
+
+        const footer = document.getElementById('main-footer');
+        if (!footer) return;
+
+        const mutationObserver = new MutationObserver(() => {
+            if (!isChanging) {
+                validateFooterContent();
+            }
+        });
+        mutationObserver.observe(footer, { childList: true, subtree: true, characterData: true });
+
+        const intersectionObserver = new IntersectionObserver((entries) => {
+            if (!isChanging && entries[0].intersectionRatio === 0) {
+                restoreFooter();
+            }
+        });
+        intersectionObserver.observe(footer);
+    });
+})();
+
+
     // --- Web Scanning Event Listeners ---
     setWebScanButtonStates(false, false); // Initial state: buttons enabled, reports disabled
 
@@ -4261,89 +4317,6 @@ function getChatbotInstructions(pageId) {
     // Function to send message to Gemini API via secure backend
     // (Removed direct event listener for generate6RiskReportOption. Only MutationObserver-based attach6RiskReportListener remains.)
 
-    // OSINT Functions
-    async function performOSINTSearch() {
-        const usernameInput = document.getElementById('osint-query');
-        const resultsContainer = document.getElementById('recon-results');
-        const osintSearchBtn = document.getElementById('osint-search-btn');
-        
-        if (!usernameInput || !resultsContainer) {
-            console.error('Required elements not found');
-            return;
-        }
-
-        const username = usernameInput.value.trim();
-        if (!username) {
-            showToast('Please enter a username to search.', 'error');
-            return;
-        }
-
-        // Show loading state
-        setLoadingState(true, osintSearchBtn, resultsContainer, 'Performing OSINT search...');
-        
-        try {
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout for OSINT
-            
-            const response = await fetch(`${backendBase}/api/recon/osint`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    username: username
-                }),
-                signal: controller.signal
-            });
-            
-            clearTimeout(timeoutId);
-
-            const data = await response.json();
-            
-            if (data.status === 'success') {
-                let resultsHtml = '<div class="space-y-4">';
-                resultsHtml += `<h3 class="text-lg font-semibold text-green-600">OSINT Results for "${username}"</h3>`;
-                
-                if (data.results && Object.keys(data.results).length > 0) {
-                    resultsHtml += '<div class="grid grid-cols-1 md:grid-cols-2 gap-4">';
-                    
-                    for (const [site, result] of Object.entries(data.results)) {
-                        const isFound = result.found === true;
-                        const bgColor = isFound ? 'bg-green-50' : 'bg-gray-50';
-                        const textColor = isFound ? 'text-green-800' : 'text-gray-600';
-                        const status = isFound ? 'Found' : 'Not Found';
-                        
-                        resultsHtml += `<div class="${bgColor} p-4 rounded-lg">`;
-                        resultsHtml += `<h4 class="font-semibold ${textColor}">${site}</h4>`;
-                        resultsHtml += `<p class="text-sm ${textColor}">Status: ${status}</p>`;
-                        if (result.url) {
-                            resultsHtml += `<a href="${result.url}" target="_blank" class="text-blue-600 hover:underline text-sm">View Profile</a>`;
-                        }
-                        resultsHtml += '</div>';
-                    }
-                    
-                    resultsHtml += '</div>';
-                } else {
-                    resultsHtml += '<div class="bg-yellow-50 p-4 rounded-lg">';
-                    resultsHtml += '<p class="text-yellow-800">No results found for this username.</p>';
-                    resultsHtml += '</div>';
-                }
-                
-                resultsHtml += '</div>';
-                resultsContainer.innerHTML = resultsHtml;
-                showToast('OSINT search completed successfully!', 'success');
-            } else {
-                resultsContainer.innerHTML = `<div class="text-red-600">Error: ${data.message}</div>`;
-                showToast('OSINT search failed!', 'error');
-            }
-        } catch (error) {
-            console.error('OSINT search error:', error);
-            resultsContainer.innerHTML = `<div class="text-red-600">Error: ${error.message}</div>`;
-            showToast('OSINT search failed!', 'error');
-        } finally {
-            setLoadingState(false, osintSearchBtn, resultsContainer);
-        }
-    }
 
     // Port Input Modal Functions
     function showPortInputModal() {
