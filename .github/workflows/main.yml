@@ -1,0 +1,34 @@
+name: Snyk Vulnerability Scan
+
+on:
+  push:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  snyk:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/python-3.10@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --file=First Attempt/backend/requirements.txt --sarif > snyk-report.sarif
+
+      - name: Upload Snyk report to GitHub
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: snyk-report.sarif
+          
+      - name: Upload Snyk SARIF report as a workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Snyk-SARIF-Report
+          path: snyk-report.sarif
